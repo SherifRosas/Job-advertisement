@@ -1,27 +1,25 @@
 'use client'
 
-import { usePathname, useRouter } from 'next/navigation'
+import { useLanguage } from './LanguageContext'
 
 export default function LanguageSwitcher() {
-  const pathname = usePathname()
-  const router = useRouter()
-
-  const switchLanguage = (lang: 'ar' | 'en') => {
-    const newPath = pathname.replace(/^\/(ar|en)/, `/${lang}`) || `/${lang}`
-    router.push(newPath)
-  }
+  const { language, setLanguage } = useLanguage()
 
   return (
     <div className="flex items-center space-x-2">
       <button
-        onClick={() => switchLanguage('ar')}
-        className="px-3 py-1 rounded hover:bg-gray-100"
+        onClick={() => setLanguage('ar')}
+        className={`px-3 py-1 rounded hover:bg-gray-100 ${
+          language === 'ar' ? 'font-bold text-blue-600' : 'text-gray-600'
+        }`}
       >
         AR
       </button>
       <button
-        onClick={() => switchLanguage('en')}
-        className="px-3 py-1 rounded hover:bg-gray-100"
+        onClick={() => setLanguage('en')}
+        className={`px-3 py-1 rounded hover:bg-gray-100 ${
+          language === 'en' ? 'font-bold text-blue-600' : 'text-gray-600'
+        }`}
       >
         EN
       </button>

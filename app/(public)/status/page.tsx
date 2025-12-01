@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { useLanguage } from '@/components/LanguageContext'
 
 interface ApplicationStatus {
   id: string
@@ -20,6 +21,8 @@ export default function StatusPage() {
   const [email, setEmail] = useState('')
   const [searchEmail, setSearchEmail] = useState('')
   const [searching, setSearching] = useState(false)
+  const { language } = useLanguage()
+  const isArabic = language === 'ar'
 
   const fetchApplications = async (userEmail?: string) => {
     try {
@@ -68,10 +71,19 @@ export default function StatusPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12 px-4">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-center mb-2" dir="rtl">حالة الطلب</h1>
-        <p className="text-center text-gray-600 mb-2">Application Status</p>
-        <p className="text-center text-sm text-gray-500 mb-8" dir="rtl">
-          تحقق من حالة طلبك بإدخال بريدك الإلكتروني - Check your application status by entering your email
+        <h1
+          className="text-3xl font-bold text-center mb-2"
+          dir={isArabic ? 'rtl' : 'ltr'}
+        >
+          {isArabic ? 'حالة الطلب' : 'Application Status'}
+        </h1>
+        <p
+          className="text-center text-sm text-gray-500 mb-8"
+          dir={isArabic ? 'rtl' : 'ltr'}
+        >
+          {isArabic
+            ? 'تحقق من حالة طلبك بإدخال بريدك الإلكتروني'
+            : 'Check your application status by entering your email'}
         </p>
 
         {/* Email Search Form */}
@@ -79,18 +91,31 @@ export default function StatusPage() {
           <div className="bg-white rounded-xl shadow-xl p-8 mb-8 border border-gray-100">
             <div className="text-center mb-6">
               <div className="text-5xl mb-4">🔍</div>
-              <h2 className="text-2xl font-bold mb-2" dir="rtl">التحقق من حالة الطلب</h2>
-              <p className="text-gray-600 mb-2">Check Your Application Status</p>
-              <p className="text-sm text-gray-500" dir="rtl">
-                أدخل بريدك الإلكتروني للاطلاع على طلباتك - Enter your email to view your applications
+              <h2
+                className="text-2xl font-bold mb-2"
+                dir={isArabic ? 'rtl' : 'ltr'}
+              >
+                {isArabic
+                  ? 'التحقق من حالة الطلب'
+                  : 'Check Your Application Status'}
+              </h2>
+              <p
+                className="text-sm text-gray-500"
+                dir={isArabic ? 'rtl' : 'ltr'}
+              >
+                {isArabic
+                  ? 'أدخل بريدك الإلكتروني للاطلاع على طلباتك'
+                  : 'Enter your email to view your applications'}
               </p>
             </div>
             <form onSubmit={handleSearch} className="space-y-5">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2" dir="rtl">
-                  البريد الإلكتروني *
+                <label
+                  className="block text-sm font-medium text-gray-700 mb-2"
+                  dir={isArabic ? 'rtl' : 'ltr'}
+                >
+                  {isArabic ? 'البريد الإلكتروني *' : 'Email Address *'}
                 </label>
-                <label className="block text-xs text-gray-500 mb-2">Email Address *</label>
                 <input
                   type="email"
                   value={searchEmail}
@@ -100,8 +125,13 @@ export default function StatusPage() {
                   autoComplete="email"
                   className="w-full border-2 border-gray-300 rounded-lg px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
                 />
-                <p className="text-xs text-gray-500 mt-2" dir="rtl">
-                  استخدم نفس البريد الذي استخدمته في التقديم - Use the same email you used for application
+                <p
+                  className="text-xs text-gray-500 mt-2"
+                  dir={isArabic ? 'rtl' : 'ltr'}
+                >
+                  {isArabic
+                    ? 'استخدم نفس البريد الذي استخدمته في التقديم'
+                    : 'Use the same email you used for application'}
                 </p>
               </div>
               <button
@@ -112,14 +142,20 @@ export default function StatusPage() {
                 {searching ? (
                   <span className="flex items-center justify-center">
                     <span className="animate-spin mr-2">⏳</span>
-                    <span dir="rtl">جاري البحث...</span>
-                    <span className="mx-2">|</span>
-                    <span>Searching...</span>
+                    <span dir={isArabic ? 'rtl' : 'ltr'}>
+                      {isArabic ? 'جاري البحث...' : 'Searching...'}
+                    </span>
                   </span>
                 ) : (
                   <>
-                    <span dir="rtl" className="block mb-1">البحث عن الطلبات</span>
-                    <span className="text-sm">Search Applications</span>
+                    <span
+                      dir={isArabic ? 'rtl' : 'ltr'}
+                      className="block mb-1"
+                    >
+                      {isArabic
+                        ? 'البحث عن الطلبات'
+                        : 'Search Applications'}
+                    </span>
                   </>
                 )}
               </button>
@@ -131,8 +167,14 @@ export default function StatusPage() {
         {email && (
           <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl shadow-lg p-5 mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between border-2 border-blue-200">
             <div>
-              <p className="text-sm text-gray-600 mb-1" dir="rtl">عرض الطلبات الخاصة بـ:</p>
-              <p className="text-xs text-gray-500 mb-1">Viewing applications for:</p>
+              <p
+                className="text-sm text-gray-600 mb-1"
+                dir={isArabic ? 'rtl' : 'ltr'}
+              >
+                {isArabic
+                  ? 'عرض الطلبات الخاصة بـ:'
+                  : 'Viewing applications for:'}
+              </p>
               <p className="font-bold text-lg text-blue-900">{email}</p>
             </div>
             <button
@@ -142,45 +184,65 @@ export default function StatusPage() {
                 setApplications([])
               }}
               className="mt-3 sm:mt-0 text-sm bg-white text-blue-600 hover:text-blue-800 hover:bg-blue-50 px-4 py-2 rounded-lg border border-blue-300 transition-colors"
-            >
-              <span dir="rtl">تغيير البريد</span>
-              <span className="mx-1">|</span>
-              <span>Change Email</span>
-            </button>
+              >
+                <span dir={isArabic ? 'rtl' : 'ltr'}>
+                  {isArabic ? 'تغيير البريد' : 'Change Email'}
+                </span>
+              </button>
           </div>
         )}
 
         {email && applications.length === 0 ? (
           <div className="bg-white rounded-xl shadow-xl p-10 text-center border border-gray-200">
             <div className="text-6xl mb-4">📭</div>
-            <h3 className="text-xl font-bold text-gray-800 mb-2" dir="rtl">لم يتم العثور على طلبات</h3>
-            <p className="text-gray-600 mb-2">No applications found</p>
-            <p className="text-sm text-gray-500 mb-6" dir="rtl">
-              إذا قمت بتقديم طلب مؤخراً، يرجى الانتظار قليلاً والمحاولة مرة أخرى
-            </p>
-            <p className="text-xs text-gray-400 mb-6">
-              If you recently submitted an application, please wait a moment and try again
+            <h3
+              className="text-xl font-bold text-gray-800 mb-2"
+              dir={isArabic ? 'rtl' : 'ltr'}
+            >
+              {isArabic
+                ? 'لم يتم العثور على طلبات'
+                : 'No applications found'}
+            </h3>
+            <p
+              className="text-sm text-gray-500 mb-6"
+              dir={isArabic ? 'rtl' : 'ltr'}
+            >
+              {isArabic
+                ? 'إذا قمت بتقديم طلب مؤخراً، يرجى الانتظار قليلاً والمحاولة مرة أخرى'
+                : 'If you recently submitted an application, please wait a moment and try again'}
             </p>
             <button
               onClick={() => router.push('/apply')}
               className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
-            >
-              <span dir="rtl">تقديم طلب جديد</span>
-              <span className="mx-2">|</span>
-              <span>Apply Now</span>
-            </button>
+              >
+                <span dir={isArabic ? 'rtl' : 'ltr'}>
+                  {isArabic ? 'تقديم طلب جديد' : 'Apply Now'}
+                </span>
+              </button>
           </div>
         ) : email && applications.length > 0 ? (
           <div className="space-y-6">
-            <div className="bg-green-50 border-2 border-green-200 rounded-xl p-4 text-center" dir="rtl">
+            <div
+              className="bg-green-50 border-2 border-green-200 rounded-xl p-4 text-center"
+              dir={isArabic ? 'rtl' : 'ltr'}
+            >
               <p className="text-green-800 font-semibold">
-                تم العثور على {applications.length} طلب - Found {applications.length} application{applications.length > 1 ? 's' : ''}
+                {isArabic
+                  ? `تم العثور على ${applications.length} طلب`
+                  : `Found ${applications.length} application${
+                      applications.length > 1 ? 's' : ''
+                    }`}
               </p>
             </div>
             {applications.map((app) => (
               <div key={app.id} className="bg-white rounded-xl shadow-xl p-8 border border-gray-100 hover:shadow-2xl transition-shadow">
                 <div className="flex items-center justify-between mb-6 pb-4 border-b-2 border-gray-200">
-                  <h2 className="text-2xl font-bold text-gray-900" dir="rtl">{app.fullName}</h2>
+                  <h2
+                    className="text-2xl font-bold text-gray-900"
+                    dir={isArabic ? 'rtl' : 'ltr'}
+                  >
+                    {app.fullName}
+                  </h2>
                   <div className="text-right">
                     <p className="text-xs text-gray-500">Application ID</p>
                     <p className="text-xs font-mono text-gray-400">{app.id.substring(0, 8)}...</p>
@@ -189,43 +251,77 @@ export default function StatusPage() {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                   <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                    <p className="text-sm text-gray-600 mb-1" dir="rtl">حالة الدفع</p>
-                    <p className="text-xs text-gray-500 mb-2">Payment Status</p>
+                    <p
+                      className="text-sm text-gray-600 mb-1"
+                      dir={isArabic ? 'rtl' : 'ltr'}
+                    >
+                      {isArabic ? 'حالة الدفع' : 'Payment Status'}
+                    </p>
                     <span className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${
                       app.paymentStatus === 'paid' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
                     }`}>
-                      {app.paymentStatus === 'paid' ? '✓ مدفوع' : app.paymentStatus}
+                      {app.paymentStatus === 'paid'
+                        ? isArabic
+                          ? '✓ مدفوع'
+                          : 'Paid'
+                        : app.paymentStatus}
                     </span>
                   </div>
                   
                   <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
-                    <p className="text-sm text-gray-600 mb-1" dir="rtl">حالة الاختيار</p>
-                    <p className="text-xs text-gray-500 mb-2">Selection Status</p>
+                    <p
+                      className="text-sm text-gray-600 mb-1"
+                      dir={isArabic ? 'rtl' : 'ltr'}
+                    >
+                      {isArabic ? 'حالة الاختيار' : 'Selection Status'}
+                    </p>
                     <span className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${
                       app.selectionStatus === 'selected' ? 'bg-blue-100 text-blue-800' : 
                       app.selectionStatus === 'rejected' ? 'bg-red-100 text-red-800' : 
                       'bg-gray-100 text-gray-800'
                     }`}>
-                      {app.selectionStatus === 'selected' ? '✓ تم الاختيار' : 
-                       app.selectionStatus === 'rejected' ? '✗ مرفوض' : 
-                       'قيد المراجعة'}
+                      {isArabic
+                        ? app.selectionStatus === 'selected'
+                          ? '✓ تم الاختيار'
+                          : app.selectionStatus === 'rejected'
+                          ? '✗ مرفوض'
+                          : 'قيد المراجعة'
+                        : app.selectionStatus === 'selected'
+                        ? '✓ Selected'
+                        : app.selectionStatus === 'rejected'
+                        ? '✗ Rejected'
+                        : 'Under review'}
                     </span>
                   </div>
                   
                   <div className="bg-indigo-50 p-4 rounded-lg border border-indigo-200">
-                    <p className="text-sm text-gray-600 mb-1" dir="rtl">التحقق الآلي</p>
-                    <p className="text-xs text-gray-500 mb-2">AI Verified</p>
+                    <p
+                      className="text-sm text-gray-600 mb-1"
+                      dir={isArabic ? 'rtl' : 'ltr'}
+                    >
+                      {isArabic ? 'التحقق الآلي' : 'AI Verification'}
+                    </p>
                     <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold ${
                       app.aiVerified ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-600'
                     }`}>
-                      {app.aiVerified ? '✓ تم التحقق' : '⏳ قيد المراجعة'}
+                      {isArabic
+                        ? app.aiVerified
+                          ? '✓ تم التحقق'
+                          : '⏳ قيد المراجعة'
+                        : app.aiVerified
+                        ? '✓ Verified'
+                        : '⏳ In review'}
                     </span>
                   </div>
                   
                   {app.coupon && (
                     <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-200">
-                      <p className="text-sm text-gray-600 mb-1" dir="rtl">رقم الكوبون</p>
-                      <p className="text-xs text-gray-500 mb-2">Coupon Code</p>
+                      <p
+                        className="text-sm text-gray-600 mb-1"
+                        dir={isArabic ? 'rtl' : 'ltr'}
+                      >
+                        {isArabic ? 'رقم الكوبون' : 'Coupon Code'}
+                      </p>
                       <p className="font-mono font-bold text-lg text-emerald-700">{app.coupon.couponCode}</p>
                     </div>
                   )}
@@ -233,19 +329,38 @@ export default function StatusPage() {
                 
                 {app.appointment && (
                   <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg border-2 border-blue-200 mt-4">
-                    <h3 className="text-lg font-bold mb-4" dir="rtl">📅 موعد المقابلة</h3>
-                    <h3 className="text-base font-semibold mb-4 text-gray-700">Interview Appointment</h3>
+                    <h3
+                      className="text-lg font-bold mb-4"
+                      dir={isArabic ? 'rtl' : 'ltr'}
+                    >
+                      {isArabic ? '📅 موعد المقابلة' : '📅 Interview Appointment'}
+                    </h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <div className="bg-white p-3 rounded-lg">
-                        <p className="text-xs text-gray-500 mb-1" dir="rtl">التاريخ</p>
+                        <p
+                          className="text-xs text-gray-500 mb-1"
+                          dir={isArabic ? 'rtl' : 'ltr'}
+                        >
+                          {isArabic ? 'التاريخ' : 'Date'}
+                        </p>
                         <p className="font-semibold">{new Date(app.appointment.date).toLocaleDateString()}</p>
                       </div>
                       <div className="bg-white p-3 rounded-lg">
-                        <p className="text-xs text-gray-500 mb-1" dir="rtl">الوقت</p>
+                        <p
+                          className="text-xs text-gray-500 mb-1"
+                          dir={isArabic ? 'rtl' : 'ltr'}
+                        >
+                          {isArabic ? 'الوقت' : 'Time'}
+                        </p>
                         <p className="font-semibold">{app.appointment.time}</p>
                       </div>
                       <div className="bg-white p-3 rounded-lg md:col-span-1">
-                        <p className="text-xs text-gray-500 mb-1" dir="rtl">المكان</p>
+                        <p
+                          className="text-xs text-gray-500 mb-1"
+                          dir={isArabic ? 'rtl' : 'ltr'}
+                        >
+                          {isArabic ? 'المكان' : 'Location'}
+                        </p>
                         <p className="font-semibold text-sm">{app.appointment.location}</p>
                       </div>
                     </div>
@@ -258,9 +373,9 @@ export default function StatusPage() {
                       href={`/coupon/${app.id}`}
                       className="inline-block w-full text-center bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200"
                     >
-                      <span dir="rtl">عرض الكوبون</span>
-                      <span className="mx-2">|</span>
-                      <span>View Coupon</span>
+                      <span dir={isArabic ? 'rtl' : 'ltr'}>
+                        {isArabic ? 'عرض الكوبون' : 'View Coupon'}
+                      </span>
                     </a>
                   </div>
                 )}

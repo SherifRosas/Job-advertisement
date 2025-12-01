@@ -3,13 +3,17 @@
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
+import Image from 'next/image'
 import { applicationSchema } from '@/lib/validation'
 import ApplicationProgress from '@/components/ApplicationProgress'
 import { saveDraftToLocalStorage, loadDraftFromLocalStorage, clearDraft } from '@/lib/draft-save'
+import { useLanguage } from '@/components/LanguageContext'
 
 export default function ApplyPage() {
   const { data: session, status } = useSession()
   const router = useRouter()
+  const { language } = useLanguage()
+  const isArabic = language === 'ar'
   const [formData, setFormData] = useState({
     fullName: '',
     email: '', // Add email field for direct application
@@ -146,23 +150,54 @@ export default function ApplyPage() {
         <ApplicationProgress currentStep="apply" className="mb-8" />
         
         <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-xl p-8 border border-gray-100">
-          <h1 className="text-3xl font-bold text-center mb-2" dir="rtl">نموذج التقديم</h1>
-          <p className="text-center text-gray-600 mb-2">Application Form</p>
-          <p className="text-center text-sm text-gray-500 mb-8" dir="rtl">
-            يرجى ملء جميع الحقول المطلوبة - Please fill all required fields
+          {/* Title with logos on far left and right */}
+          <div className="flex items-center justify-between gap-4 mb-4">
+            <div className="relative w-10 h-10 md:w-12 md:h-12">
+              <Image
+                src="/Official-logo/28629918-c2a3-4e84-b855-0bd30046e219.jfif"
+                alt="Ministry of Education Logo Left"
+                fill
+                className="object-contain"
+              />
+            </div>
+            <h1
+              className="flex-1 text-2xl md:text-3xl font-bold text-gray-900 text-center"
+              dir={isArabic ? 'rtl' : 'ltr'}
+            >
+              {isArabic ? 'نموذج التقديم' : 'Application Form'}
+            </h1>
+            <div className="relative w-10 h-10 md:w-12 md:h-12">
+              <Image
+                src="/Official-logo/c184a4ff-03f5-4548-9ffe-4fc723b9acc4.jfif"
+                alt="Ministry of Education Logo Right"
+                fill
+                className="object-contain"
+              />
+            </div>
+          </div>
+          <p
+            className="text-center text-sm text-gray-500 mb-8"
+            dir={isArabic ? 'rtl' : 'ltr'}
+          >
+            {isArabic
+              ? 'يرجى ملء جميع الحقول المطلوبة'
+              : 'Please fill all required fields'}
           </p>
           
           {/* What Happens Next Info */}
-          <div className="bg-blue-50 border-r-4 border-blue-500 p-5 rounded-lg mb-6" dir="rtl">
-            <h3 className="font-bold text-blue-900 mb-2">ماذا يحدث بعد التقديم؟</h3>
-            <p className="text-sm text-blue-800 mb-2">
-              بعد إرسال النموذج، ستحصل فوراً على الكوبون الخاص بك وتفاصيل موعد المقابلة. 
-              يمكنك طباعة الكوبون أو حفظه على جهازك.
-            </p>
-            <h3 className="font-bold text-blue-900 mt-3 mb-2">What happens after submission?</h3>
+          <div
+            className="bg-blue-50 border-r-4 border-blue-500 p-5 rounded-lg mb-6"
+            dir={isArabic ? 'rtl' : 'ltr'}
+          >
+            <h3 className="font-bold text-blue-900 mb-2">
+              {isArabic
+                ? 'ماذا يحدث بعد التقديم؟'
+                : 'What happens after submission?'}
+            </h3>
             <p className="text-sm text-blue-800">
-              After submitting the form, you will immediately receive your coupon and interview appointment details. 
-              You can print the coupon or save it to your device.
+              {isArabic
+                ? 'بعد إرسال النموذج، ستحصل فوراً على الكوبون الخاص بك وتفاصيل موعد المقابلة. يمكنك طباعة الكوبون أو حفظه على جهازك.'
+                : 'After submitting the form, you will immediately receive your coupon and interview appointment details. You can print the coupon or save it to your device.'}
             </p>
           </div>
 
@@ -173,9 +208,14 @@ export default function ApplyPage() {
         )}
 
         {draftSaved && (
-          <div className="bg-green-50 border-r-4 border-green-500 p-4 mb-6 rounded-lg" dir="rtl">
+          <div
+            className="bg-green-50 border-r-4 border-green-500 p-4 mb-6 rounded-lg"
+            dir={isArabic ? 'rtl' : 'ltr'}
+          >
             <p className="text-green-700 text-sm font-medium">
-              ✓ تم حفظ المسودة تلقائياً - Draft saved automatically
+              {isArabic
+                ? '✓ تم حفظ المسودة تلقائياً'
+                : 'Draft saved automatically'}
             </p>
           </div>
         )}
@@ -183,10 +223,12 @@ export default function ApplyPage() {
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Email */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2" dir="rtl">
-              البريد الإلكتروني *
+            <label
+              className="block text-sm font-medium text-gray-700 mb-2"
+              dir={isArabic ? 'rtl' : 'ltr'}
+            >
+              {isArabic ? 'البريد الإلكتروني *' : 'Email Address *'}
             </label>
-            <label className="block text-xs text-gray-500 mb-2">Email Address *</label>
             <input
               type="email"
               value={formData.email}
@@ -196,17 +238,24 @@ export default function ApplyPage() {
               placeholder="example@email.com"
               className="w-full border-2 border-gray-300 rounded-lg px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
             />
-            <p className="text-xs text-gray-500 mt-1" dir="rtl">
-              سيتم استخدام هذا البريد لتحديد طلبك - This email will be used to identify your application
+            <p
+              className="text-xs text-gray-500 mt-1"
+              dir={isArabic ? 'rtl' : 'ltr'}
+            >
+              {isArabic
+                ? 'سيتم استخدام هذا البريد لتحديد طلبك'
+                : 'This email will be used to identify your application'}
             </p>
           </div>
 
           {/* Full Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2" dir="rtl">
-              الاسم الكامل *
+            <label
+              className="block text-sm font-medium text-gray-700 mb-2"
+              dir={isArabic ? 'rtl' : 'ltr'}
+            >
+              {isArabic ? 'الاسم الكامل *' : 'Full Name *'}
             </label>
-            <label className="block text-xs text-gray-500 mb-2">Full Name *</label>
             <input
               type="text"
               value={formData.fullName}
@@ -215,19 +264,26 @@ export default function ApplyPage() {
               autoComplete="name"
               placeholder="أدخل الاسم الكامل كما هو في بطاقة الهوية"
               className="w-full border-2 border-gray-300 rounded-lg px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
-              dir="rtl"
+              dir={isArabic ? 'rtl' : 'ltr'}
             />
-            <p className="text-xs text-gray-500 mt-1" dir="rtl">
-              يجب أن يطابق الاسم الموجود في بطاقة الهوية - Must match your National ID
+            <p
+              className="text-xs text-gray-500 mt-1"
+              dir={isArabic ? 'rtl' : 'ltr'}
+            >
+              {isArabic
+                ? 'يجب أن يطابق الاسم الموجود في بطاقة الهوية'
+                : 'Must match your National ID'}
             </p>
           </div>
 
           {/* Address */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2" dir="rtl">
-              العنوان الكامل *
+            <label
+              className="block text-sm font-medium text-gray-700 mb-2"
+              dir={isArabic ? 'rtl' : 'ltr'}
+            >
+              {isArabic ? 'العنوان الكامل *' : 'Full Address *'}
             </label>
-            <label className="block text-xs text-gray-500 mb-2">Full Address *</label>
             <textarea
               value={formData.address}
               onChange={(e) => setFormData({ ...formData, address: e.target.value })}
@@ -236,19 +292,26 @@ export default function ApplyPage() {
               autoComplete="street-address"
               placeholder="المحافظة، المدينة، الشارع، رقم المبنى"
               className="w-full border-2 border-gray-300 rounded-lg px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all resize-none"
-              dir="rtl"
+              dir={isArabic ? 'rtl' : 'ltr'}
             />
-            <p className="text-xs text-gray-500 mt-1" dir="rtl">
-              أدخل العنوان الكامل بالتفصيل - Enter complete address with details
+            <p
+              className="text-xs text-gray-500 mt-1"
+              dir={isArabic ? 'rtl' : 'ltr'}
+            >
+              {isArabic
+                ? 'أدخل العنوان الكامل بالتفصيل'
+                : 'Enter complete address with details'}
             </p>
           </div>
 
           {/* Phone Number */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2" dir="rtl">
-              رقم الهاتف *
+            <label
+              className="block text-sm font-medium text-gray-700 mb-2"
+              dir={isArabic ? 'rtl' : 'ltr'}
+            >
+              {isArabic ? 'رقم الهاتف *' : 'Phone Number *'}
             </label>
-            <label className="block text-xs text-gray-500 mb-2">Phone Number *</label>
             <input
               type="tel"
               value={formData.phoneNumber}
@@ -258,17 +321,26 @@ export default function ApplyPage() {
               autoComplete="tel"
               className="w-full border-2 border-gray-300 rounded-lg px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
             />
-            <p className="text-xs text-gray-500 mt-1" dir="rtl">
-              رقم هاتف نشط للتواصل - Active phone number for communication
+            <p
+              className="text-xs text-gray-500 mt-1"
+              dir={isArabic ? 'rtl' : 'ltr'}
+            >
+              {isArabic
+                ? 'رقم هاتف نشط للتواصل'
+                : 'Active phone number for communication'}
             </p>
           </div>
 
           {/* National ID Front */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2" dir="rtl">
-              بطاقة الهوية - الوجه الأمامي *
+            <label
+              className="block text-sm font-medium text-gray-700 mb-2"
+              dir={isArabic ? 'rtl' : 'ltr'}
+            >
+              {isArabic
+                ? 'بطاقة الهوية - الوجه الأمامي *'
+                : 'National ID - Front *'}
             </label>
-            <label className="block text-xs text-gray-500 mb-2">National ID - Front *</label>
             <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors">
               <input
                 type="file"
@@ -283,29 +355,46 @@ export default function ApplyPage() {
                 className="cursor-pointer flex flex-col items-center"
               >
                 <span className="text-4xl mb-2">📷</span>
-                <span className="text-sm text-gray-600 mb-1" dir="rtl">اضغط لرفع الصورة</span>
-                <span className="text-xs text-gray-500">Click to upload image</span>
+                <span
+                  className="text-sm text-gray-600 mb-1"
+                  dir={isArabic ? 'rtl' : 'ltr'}
+                >
+                  {isArabic ? 'اضغط لرفع الصورة' : 'Click to upload image'}
+                </span>
               </label>
             </div>
             {nationalIdFront && (
-              <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg" dir="rtl">
+              <div
+                className="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg"
+                dir={isArabic ? 'rtl' : 'ltr'}
+              >
                 <p className="text-sm text-green-700 font-medium">
-                  ✓ تم رفع الملف: {nationalIdFront.name}
+                  {isArabic
+                    ? `✓ تم رفع الملف: ${nationalIdFront.name}`
+                    : `✓ File uploaded: ${nationalIdFront.name}`}
                 </p>
-                <p className="text-xs text-green-600">File uploaded: {nationalIdFront.name}</p>
               </div>
             )}
-            <p className="text-xs text-gray-500 mt-2" dir="rtl">
-              يجب أن تكون الصورة واضحة ويمكن قراءتها - Image must be clear and readable
+            <p
+              className="text-xs text-gray-500 mt-2"
+              dir={isArabic ? 'rtl' : 'ltr'}
+            >
+              {isArabic
+                ? 'يجب أن تكون الصورة واضحة ويمكن قراءتها'
+                : 'Image must be clear and readable'}
             </p>
           </div>
 
           {/* National ID Back */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2" dir="rtl">
-              بطاقة الهوية - الخلفية *
+            <label
+              className="block text-sm font-medium text-gray-700 mb-2"
+              dir={isArabic ? 'rtl' : 'ltr'}
+            >
+              {isArabic
+                ? 'بطاقة الهوية - الخلفية *'
+                : 'National ID - Back *'}
             </label>
-            <label className="block text-xs text-gray-500 mb-2">National ID - Back *</label>
             <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors">
               <input
                 type="file"
@@ -320,27 +409,44 @@ export default function ApplyPage() {
                 className="cursor-pointer flex flex-col items-center"
               >
                 <span className="text-4xl mb-2">📷</span>
-                <span className="text-sm text-gray-600 mb-1" dir="rtl">اضغط لرفع الصورة</span>
-                <span className="text-xs text-gray-500">Click to upload image</span>
+                <span
+                  className="text-sm text-gray-600 mb-1"
+                  dir={isArabic ? 'rtl' : 'ltr'}
+                >
+                  {isArabic ? 'اضغط لرفع الصورة' : 'Click to upload image'}
+                </span>
               </label>
             </div>
             {nationalIdBack && (
-              <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg" dir="rtl">
+              <div
+                className="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg"
+                dir={isArabic ? 'rtl' : 'ltr'}
+              >
                 <p className="text-sm text-green-700 font-medium">
-                  ✓ تم رفع الملف: {nationalIdBack.name}
+                  {isArabic
+                    ? `✓ تم رفع الملف: ${nationalIdBack.name}`
+                    : `✓ File uploaded: ${nationalIdBack.name}`}
                 </p>
-                <p className="text-xs text-green-600">File uploaded: {nationalIdBack.name}</p>
               </div>
             )}
-            <p className="text-xs text-gray-500 mt-2" dir="rtl">
-              يجب أن تكون الصورة واضحة ويمكن قراءتها - Image must be clear and readable
+            <p
+              className="text-xs text-gray-500 mt-2"
+              dir={isArabic ? 'rtl' : 'ltr'}
+            >
+              {isArabic
+                ? 'يجب أن تكون الصورة واضحة ويمكن قراءتها'
+                : 'Image must be clear and readable'}
             </p>
           </div>
 
           {/* Agreements */}
           <div className="space-y-4 bg-gray-50 p-6 rounded-lg border border-gray-200">
-            <h3 className="font-semibold mb-4" dir="rtl">التأكيدات والموافقات</h3>
-            <h3 className="font-semibold mb-4 text-gray-600">Confirmations & Agreements</h3>
+            <h3
+              className="font-semibold mb-4"
+              dir={isArabic ? 'rtl' : 'ltr'}
+            >
+              {isArabic ? 'التأكيدات والموافقات' : 'Confirmations & Agreements'}
+            </h3>
             
             <label className="flex items-start space-x-3 space-x-reverse p-4 bg-white rounded-lg border-2 border-gray-200 hover:border-blue-300 transition-colors cursor-pointer">
               <input
@@ -351,11 +457,13 @@ export default function ApplyPage() {
                 className="mt-1 w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               />
               <div className="flex-1">
-                <span className="text-sm text-gray-700 block mb-1" dir="rtl">
-                  أؤكد أنني أستوفي جميع متطلبات الوظيفة المذكورة أعلاه *
-                </span>
-                <span className="text-xs text-gray-600">
-                  I confirm that I meet all the job requirements mentioned above *
+                <span
+                  className="text-sm text-gray-700 block mb-1"
+                  dir={isArabic ? 'rtl' : 'ltr'}
+                >
+                  {isArabic
+                    ? 'أؤكد أنني أستوفي جميع متطلبات الوظيفة المذكورة أعلاه *'
+                    : 'I confirm that I meet all the job requirements mentioned above *'}
                 </span>
               </div>
             </label>
@@ -369,11 +477,13 @@ export default function ApplyPage() {
                 className="mt-1 w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               />
               <div className="flex-1">
-                <span className="text-sm text-gray-700 block mb-1" dir="rtl">
-                  أوافق على تقديم المستندات الرسمية الأصلية في يوم المقابلة *
-                </span>
-                <span className="text-xs text-gray-600">
-                  I agree to submit original official documents on the interview day *
+                <span
+                  className="text-sm text-gray-700 block mb-1"
+                  dir={isArabic ? 'rtl' : 'ltr'}
+                >
+                  {isArabic
+                    ? 'أوافق على تقديم المستندات الرسمية الأصلية في يوم المقابلة *'
+                    : 'I agree to submit original official documents on the interview day *'}
                 </span>
               </div>
             </label>
@@ -389,19 +499,28 @@ export default function ApplyPage() {
               {loading ? (
                 <span className="flex items-center justify-center">
                   <span className="animate-spin mr-2">⏳</span>
-                  <span dir="rtl">جاري الإرسال...</span>
-                  <span className="mx-2">|</span>
-                  <span>Submitting...</span>
+                  <span dir={isArabic ? 'rtl' : 'ltr'}>
+                    {isArabic ? 'جاري الإرسال...' : 'Submitting...'}
+                  </span>
                 </span>
               ) : (
                 <>
-                  <span dir="rtl" className="block mb-1">إرسال الطلب</span>
-                  <span className="text-base">Submit Application</span>
+                  <span
+                    dir={isArabic ? 'rtl' : 'ltr'}
+                    className="block mb-1"
+                  >
+                    {isArabic ? 'إرسال الطلب' : 'Submit Application'}
+                  </span>
                 </>
               )}
             </button>
-            <p className="text-xs text-center text-gray-500 mt-3" dir="rtl">
-              بعد الإرسال، ستحصل فوراً على الكوبون - After submission, you will receive your coupon immediately
+            <p
+              className="text-xs text-center text-gray-500 mt-3"
+              dir={isArabic ? 'rtl' : 'ltr'}
+            >
+              {isArabic
+                ? 'بعد الإرسال، ستحصل فوراً على الكوبون'
+                : 'After submission, you will receive your coupon immediately'}
             </p>
           </div>
         </form>
