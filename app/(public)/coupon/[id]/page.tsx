@@ -82,7 +82,7 @@ export default function CouponPage() {
               </h2>
               <p className="text-xl text-green-600 mb-2">Application Accepted!</p>
               <p className="text-sm text-green-700 mt-4" dir="rtl">
-                سيتم مراجعة طلبك وإبلاغك بالنتيجة - Your application will be reviewed and you'll be notified
+                سيتم مراجعة طلبك وإبلاغك بالنتيجة - Your application will be reviewed and you will be notified
               </p>
             </div>
 
@@ -240,7 +240,7 @@ export default function CouponPage() {
             <p className="text-green-800 font-semibold mb-2">🎉 تهانينا! تم تقديم طلبك بنجاح</p>
             <p className="text-green-700 text-sm">Congratulations! Your application has been submitted successfully</p>
             <p className="text-green-600 text-xs mt-2">سيتم مراجعة طلبك وإبلاغك بالنتيجة عبر البريد الإلكتروني</p>
-            <p className="text-green-600 text-xs">Your application will be reviewed and you'll be notified via email</p>
+            <p className="text-green-600 text-xs">Your application will be reviewed and you will be notified via email</p>
           </div>
         </div>
       </div>

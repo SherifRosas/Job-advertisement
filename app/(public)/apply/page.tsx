@@ -37,19 +37,22 @@ export default function ApplyPage() {
   // }
 
   // Load draft on mount (using email as identifier)
+  // Load draft once on initial mount. We intentionally omit formData from dependencies
+  // to avoid overwriting user edits after first load.
   useEffect(() => {
     const email = formData.email || 'anonymous'
     const draft = loadDraftFromLocalStorage(email)
     if (draft) {
-      setFormData({
-        fullName: draft.fullName || formData.fullName,
-        email: formData.email, // Keep email from form
-        address: draft.address || formData.address,
-        phoneNumber: draft.phoneNumber || formData.phoneNumber,
+      setFormData((prev) => ({
+        fullName: draft.fullName || prev.fullName,
+        email: prev.email, // Keep email from current form state
+        address: draft.address || prev.address,
+        phoneNumber: draft.phoneNumber || prev.phoneNumber,
         requirementsAgreed: draft.requirementsAgreed,
         documentsAgreed: draft.documentsAgreed,
-      })
+      }))
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // Auto-save draft every 30 seconds (using email as identifier)
@@ -398,7 +401,7 @@ export default function ApplyPage() {
               )}
             </button>
             <p className="text-xs text-center text-gray-500 mt-3" dir="rtl">
-              بعد الإرسال، ستحصل فوراً على الكوبون - After submission, you'll receive your coupon immediately
+              بعد الإرسال، ستحصل فوراً على الكوبون - After submission, you will receive your coupon immediately
             </p>
           </div>
         </form>
