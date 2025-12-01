@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/supabase'
 import { getSettings } from '@/lib/supabase-server'
 import { applicationSchema } from '@/lib/validation'
-import { verifyApplicationData } from '@/lib/ai-verification'
 import { sendApplicationConfirmation } from '@/lib/email-notifications'
 import { findNextInterviewSlot } from '@/lib/interview-scheduler'
 import { writeFile, mkdir } from 'fs/promises'
@@ -166,31 +165,6 @@ export async function POST(request: NextRequest) {
       amount: 0, // Payment skipped
       status: 'completed',
     })
-
-    // AI verification (non-blocking failure)
-    try {
-      const verification = await verifyApplicationData(
-        {
-          fullName,
-          address,
-          phoneNumber,
-        },
-        `/uploads/${frontFileName}`,
-        `/uploads/${backFileName}`
-      )
-
-      await db.updateApplication(applicationId, {
-        aiVerified: verification.verified,
-        aiVerificationNotes: verification.notes.join('\n'),
-      })
-    } catch (err) {
-      console.error('AI verification failed:', err)
-      // Keep application but mark as not verified
-      await db.updateApplication(applicationId, {
-        aiVerified: false,
-        aiVerificationNotes: 'AI verification failed. Manual review required.',
-      })
-    }
 
     // Send confirmation "email" (logged to messages table)
     try {
