@@ -137,8 +137,7 @@ export async function POST(request: NextRequest) {
       printable: true,
     })
 
-    // Generate appointment using scheduling rules
-    const settings = await getSettings()
+    // Generate appointment using scheduling rules (reuse previously fetched settings)
     const slot = await findNextInterviewSlot()
 
     if (!slot) {
