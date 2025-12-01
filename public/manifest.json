@@ -1,0 +1,19 @@
+{
+  "name": "Job Advertisement System",
+  "short_name": "Job App",
+  "description": "Egyptian Ministry of Education Job Advertisement System",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
+

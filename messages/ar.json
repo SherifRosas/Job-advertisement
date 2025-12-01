@@ -1,0 +1,46 @@
+{
+  "common": {
+    "welcome": "مرحباً",
+    "login": "تسجيل الدخول",
+    "logout": "تسجيل الخروج",
+    "apply": "تقدم الآن",
+    "submit": "إرسال",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "close": "إغلاق"
+  },
+  "job": {
+    "title": "مدير الحسابات المالية",
+    "description": "تعلن وزارة التربية والتعليم عن وظيفة مدير الحسابات المالية",
+    "requirements": "المتطلبات",
+    "applicationProcess": "عملية التقديم"
+  },
+  "application": {
+    "form": "نموذج التقديم",
+    "fullName": "الاسم الكامل",
+    "address": "العنوان",
+    "phoneNumber": "رقم الهاتف",
+    "nationalId": "بطاقة الهوية",
+    "front": "الوجه الأمامي",
+    "back": "الخلفية",
+    "requirementsAgreed": "أؤكد أنني أستوفي متطلبات الوظيفة",
+    "documentsAgreed": "أوافق على تقديم المستندات الرسمية في يوم المقابلة"
+  },
+  "payment": {
+    "title": "الدفع",
+    "amount": "1,000 جنيه مصري",
+    "methods": "طرق الدفع",
+    "process": "معالجة الدفع"
+  },
+  "admin": {
+    "dashboard": "لوحة التحكم",
+    "applications": "الطلبات",
+    "settings": "الإعدادات",
+    "select": "اختيار",
+    "close": "إغلاق الإعلان"
+  }
+}
+
+

@@ -1,0 +1,46 @@
+{
+  "common": {
+    "welcome": "Welcome",
+    "login": "Login",
+    "logout": "Logout",
+    "apply": "Apply Now",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close"
+  },
+  "job": {
+    "title": "Financial Accounts Manager",
+    "description": "The Egyptian Ministry of Education announces a position for Financial Accounts Manager",
+    "requirements": "Requirements",
+    "applicationProcess": "Application Process"
+  },
+  "application": {
+    "form": "Application Form",
+    "fullName": "Full Name",
+    "address": "Address",
+    "phoneNumber": "Phone Number",
+    "nationalId": "National ID",
+    "front": "Front",
+    "back": "Back",
+    "requirementsAgreed": "I confirm that I meet the job requirements",
+    "documentsAgreed": "I agree to submit official documents on the day of the interview"
+  },
+  "payment": {
+    "title": "Payment",
+    "amount": "1,000 Egyptian Pounds",
+    "methods": "Payment Methods",
+    "process": "Processing Payment"
+  },
+  "admin": {
+    "dashboard": "Admin Dashboard",
+    "applications": "Applications",
+    "settings": "Settings",
+    "select": "Select",
+    "close": "Close Advertisement"
+  }
+}
+
+
