@@ -111,7 +111,6 @@ export async function POST(request: NextRequest) {
       documentsAgreed,
       aiVerified: false, // Will be updated by AI
       paymentStatus: 'paid', // Skip payment for now - mark as paid
-      paymentTransactionId: `SKIP-${Date.now()}`, // Mark as skipped
     })
 
     // Update user with application data if needed
