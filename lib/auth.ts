@@ -77,7 +77,7 @@ export const authOptions: NextAuthOptions = {
               await db.createUser({
                 id: userId,
                 email: user.email || '',
-                gmailId: account.providerAccountId,
+                // gmailId is currently not part of the Supabase user type; omit it here
                 name: user.name || '',
                 emailVerified: false,
                 phoneVerified: false,
@@ -88,10 +88,9 @@ export const authOptions: NextAuthOptions = {
               // Don't block login - continue even if user creation fails
             }
           } else {
-            // Update existing user
+            // Update existing user (without gmailId, which is not in the update type)
             try {
               await db.updateUser(existingUser.id, {
-                gmailId: account.providerAccountId,
                 name: user.name || existingUser.name || undefined,
               })
               console.log('User updated successfully:', existingUser.id)
