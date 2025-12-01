@@ -255,7 +255,7 @@ export default function StatusPage() {
                 {app.coupon && (
                   <div className="mt-4">
                     <a
-                      href={`/coupon/${app.coupon.id || app.id}`}
+                      href={`/coupon/${app.id}`}
                       className="inline-block w-full text-center bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-200"
                     >
                       <span dir="rtl">عرض الكوبون</span>
