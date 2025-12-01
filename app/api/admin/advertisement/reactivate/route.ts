@@ -58,8 +58,7 @@ export async function POST(request: NextRequest) {
     await db.updateSettings({
       advertisementStatus: 'active',
       qrCodeUsed: true,
-      closedAt: null,
-      closedBy: null,
+      // We intentionally omit closedAt/closedBy here so they remain as-is or can be cleared separately
     })
 
     return NextResponse.json({
