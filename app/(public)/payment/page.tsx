@@ -62,7 +62,8 @@ export default function PaymentPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12 px-4">
       <div className="max-w-4xl mx-auto">
-        <ApplicationProgress currentStep="payment" className="mb-8" />
+        {/* Payment step is skipped in the simplified flow; show coupon as the final step */}
+        <ApplicationProgress currentStep="coupon" className="mb-8" />
         
         <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg p-8">
           <h1 className="text-3xl font-bold text-center mb-2">Payment</h1>
