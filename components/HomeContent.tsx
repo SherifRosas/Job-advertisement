@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import SocialShare from '@/components/SocialShare'
 import { useLanguage } from './LanguageContext'
 
@@ -39,14 +38,11 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
           <div className="text-center mb-8">
             {/* Title with logos pushed to far left and far right */}
             <div className="flex items-center justify-between gap-4 mb-4">
-              <div className="relative w-12 h-12">
-                <Image
-                  src="/Official-logo/28629918-c2a3-4e84-b855-0bd30046e219.jfif"
-                  alt="Ministry of Education Logo Left"
-                  fill
-                  className="object-contain"
-                />
-              </div>
+              <img
+                src="/Official-logo/28629918-c2a3-4e84-b855-0bd30046e219.jfif"
+                alt="Ministry of Education Logo Left"
+                className="h-12 w-auto object-contain"
+              />
               <h1
                 className="flex-1 text-3xl md:text-4xl font-bold text-gray-900 text-center leading-snug"
                 dir={isArabic ? 'rtl' : 'ltr'}
@@ -55,14 +51,11 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
                   ? 'مدير حسابات بوزارة التربية والتعليم المصرية'
                   : 'Accounts Manager at the Egyptian Ministry of Education'}
               </h1>
-              <div className="relative w-12 h-12">
-                <Image
-                  src="/Official-logo/c184a4ff-03f5-4548-9ffe-4fc723b9acc4.jfif"
-                  alt="Ministry of Education Logo Right"
-                  fill
-                  className="object-contain"
-                />
-              </div>
+              <img
+                src="/Official-logo/c184a4ff-03f5-4548-9ffe-4fc723b9acc4.jfif"
+                alt="Ministry of Education Logo Right"
+                className="h-12 w-auto object-contain"
+              />
             </div>
             <p className="text-lg md:text-2xl text-gray-700 mb-4">
               {isArabic

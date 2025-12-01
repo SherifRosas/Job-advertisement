@@ -3,7 +3,6 @@
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
-import Image from 'next/image'
 import { applicationSchema } from '@/lib/validation'
 import ApplicationProgress from '@/components/ApplicationProgress'
 import { saveDraftToLocalStorage, loadDraftFromLocalStorage, clearDraft } from '@/lib/draft-save'
@@ -152,28 +151,22 @@ export default function ApplyPage() {
         <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-xl p-8 border border-gray-100">
           {/* Title with logos on far left and right */}
           <div className="flex items-center justify-between gap-4 mb-4">
-            <div className="relative w-10 h-10 md:w-12 md:h-12">
-              <Image
-                src="/Official-logo/28629918-c2a3-4e84-b855-0bd30046e219.jfif"
-                alt="Ministry of Education Logo Left"
-                fill
-                className="object-contain"
-              />
-            </div>
+            <img
+              src="/Official-logo/28629918-c2a3-4e84-b855-0bd30046e219.jfif"
+              alt="Ministry of Education Logo Left"
+              className="h-10 md:h-12 w-auto object-contain"
+            />
             <h1
               className="flex-1 text-2xl md:text-3xl font-bold text-gray-900 text-center"
               dir={isArabic ? 'rtl' : 'ltr'}
             >
               {isArabic ? 'نموذج التقديم' : 'Application Form'}
             </h1>
-            <div className="relative w-10 h-10 md:w-12 md:h-12">
-              <Image
-                src="/Official-logo/c184a4ff-03f5-4548-9ffe-4fc723b9acc4.jfif"
-                alt="Ministry of Education Logo Right"
-                fill
-                className="object-contain"
-              />
-            </div>
+            <img
+              src="/Official-logo/c184a4ff-03f5-4548-9ffe-4fc723b9acc4.jfif"
+              alt="Ministry of Education Logo Right"
+              className="h-10 md:h-12 w-auto object-contain"
+            />
           </div>
           <p
             className="text-center text-sm text-gray-500 mb-8"
