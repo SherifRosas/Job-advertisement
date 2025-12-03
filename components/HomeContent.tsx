@@ -12,16 +12,16 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
   if (isClosed) {
     return (
       <div className="max-w-3xl mx-auto text-center">
-        <div className="bg-red-50 border-2 border-red-500 rounded-lg p-8">
-        <h2 className="text-3xl font-bold text-red-700 mb-4">
+        <div className="bg-red-900/30 border-2 border-red-500 rounded-lg p-8 glass-effect">
+        <h2 className="text-3xl font-bold text-red-400 mb-4">
           {isArabic ? 'تم إغلاق الإعلان' : 'Advertisement Closed'}
         </h2>
-        <p className="text-lg text-gray-700 mb-4">
+        <p className="text-lg text-gray-300 mb-4">
           {isArabic
             ? 'تم إغلاق هذا الإعلان الوظيفي ولم يعد يستقبل طلبات جديدة.'
             : 'This job advertisement has been closed and is no longer accepting applications.'}
         </p>
-        <p className="text-gray-600">
+        <p className="text-gray-400">
           {isArabic
             ? 'قد يتم إعادة تفعيل الإعلان في المستقبل. يرجى المتابعة لاحقاً.'
             : 'The advertisement may be reactivated in the future. Please check back later.'}
@@ -52,7 +52,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
             <div className="absolute top-20 left-10 w-3 h-3 bg-gray-700 rounded-full pulse-soft float-animation" style={{ animationDelay: '0s' }} />
             <div className="absolute top-40 right-20 w-2 h-2 bg-gray-600 rounded-full pulse-soft float-animation" style={{ animationDelay: '1.5s' }} />
             <div className="absolute bottom-32 left-1/4 w-2.5 h-2.5 bg-gray-800 rounded-full pulse-soft float-animation" style={{ animationDelay: '3s' }} />
-            <div className="absolute top-1/2 right-1/3 w-1.5 h-1.5 bg-gray-500 rounded-full pulse-soft float-animation" style={{ animationDelay: '4.5s' }} />
+            <div className="absolute top-1/2 right-1/3 w-1.5 h-1.5 bg-gray-900/500 rounded-full pulse-soft float-animation" style={{ animationDelay: '4.5s' }} />
             <div className="absolute bottom-20 right-1/4 w-2 h-2 bg-gray-700 rounded-full pulse-soft float-animation" style={{ animationDelay: '6s' }} />
           </div>
           
@@ -106,7 +106,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
                 <div className="absolute inset-0 rounded-full border-2 border-white/10 group-hover:border-white/20 transition-colors duration-500" />
               </div>
             </div>
-            <p className="text-lg md:text-2xl text-gray-700 mb-8 font-semibold text-center tracking-tight">
+            <p className="text-lg md:text-2xl text-gray-300 mb-8 font-semibold text-center tracking-tight">
               {isArabic
                 ? 'Accounts Manager at the Egyptian Ministry of Education'
                 : 'مدير حسابات بوزارة التربية والتعليم المصرية'}
@@ -136,7 +136,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
               </span>
             </h2>
             <p
-              className="text-gray-700 leading-relaxed mb-4"
+              className="text-gray-300 leading-relaxed mb-4"
               dir={isArabic ? 'rtl' : 'ltr'}
             >
               {isArabic
@@ -155,24 +155,24 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
               </span>
             </h3>
             <ul
-              className="list-none space-y-3 text-gray-700 pl-0"
+              className="list-none space-y-3 text-gray-300 pl-0"
               dir={isArabic ? 'rtl' : 'ltr'}
             >
-              <li className="flex items-start gap-4 group hover:bg-white/40 p-3 rounded-lg transition-all duration-300">
+              <li className="flex items-start gap-4 group hover:bg-gray-700/10 p-3 rounded-lg transition-all duration-300">
                 <span className="text-3xl mt-1 group-hover:scale-110 transition-transform duration-300">💼</span>
-                <span className="text-gray-800 font-medium text-lg group-hover:text-black transition-colors">{isArabic
+                <span className="text-gray-200 font-medium text-lg group-hover:text-white transition-colors">{isArabic
                   ? 'خبرة في إدارة الحسابات'
                   : 'Experience in accounting management'}</span>
               </li>
-              <li className="flex items-start gap-4 group hover:bg-white/40 p-3 rounded-lg transition-all duration-300">
+              <li className="flex items-start gap-4 group hover:bg-gray-700/10 p-3 rounded-lg transition-all duration-300">
                 <span className="text-3xl mt-1 group-hover:scale-110 transition-transform duration-300">📊</span>
-                <span className="text-gray-800 font-medium text-lg group-hover:text-black transition-colors">{isArabic
+                <span className="text-gray-200 font-medium text-lg group-hover:text-white transition-colors">{isArabic
                   ? 'خبرة في إعداد التقارير المالية'
                   : 'Experience in preparing financial reports'}</span>
               </li>
-              <li className="flex items-start gap-4 group hover:bg-white/40 p-3 rounded-lg transition-all duration-300">
+              <li className="flex items-start gap-4 group hover:bg-gray-700/10 p-3 rounded-lg transition-all duration-300">
                 <span className="text-3xl mt-1 group-hover:scale-110 transition-transform duration-300">👥</span>
-                <span className="text-gray-800 font-medium text-lg group-hover:text-black transition-colors">{isArabic
+                <span className="text-gray-200 font-medium text-lg group-hover:text-white transition-colors">{isArabic
                   ? 'خبرة في الإشراف على الفريق المالي'
                   : 'Experience supervising the finance team'}</span>
               </li>
@@ -189,18 +189,18 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
               </span>
             </h3>
             <ul
-              className="list-none space-y-3 text-gray-700 pl-0"
+              className="list-none space-y-3 text-gray-300 pl-0"
               dir={isArabic ? 'rtl' : 'ltr'}
             >
-              <li className="flex items-start gap-4 group hover:bg-white/40 p-3 rounded-lg transition-all duration-300">
+              <li className="flex items-start gap-4 group hover:bg-gray-700/10 p-3 rounded-lg transition-all duration-300">
                 <span className="text-3xl mt-1 group-hover:scale-110 transition-transform duration-300">🎓</span>
-                <span className="text-gray-800 font-medium text-lg group-hover:text-black transition-colors">{isArabic
+                <span className="text-gray-200 font-medium text-lg group-hover:text-white transition-colors">{isArabic
                   ? 'درجة بكالوريوس في المحاسبة أو ما يعادلها'
                   : "Bachelor's degree in Accounting or equivalent"}</span>
               </li>
-              <li className="flex items-start gap-4 group hover:bg-white/40 p-3 rounded-lg transition-all duration-300">
+              <li className="flex items-start gap-4 group hover:bg-gray-700/10 p-3 rounded-lg transition-all duration-300">
                 <span className="text-3xl mt-1 group-hover:scale-110 transition-transform duration-300">💻</span>
-                <span className="text-gray-800 font-medium text-lg group-hover:text-black transition-colors">{isArabic
+                <span className="text-gray-200 font-medium text-lg group-hover:text-white transition-colors">{isArabic
                   ? 'إجادة استخدام برامج المحاسبة'
                   : 'Proficiency in using accounting software'}</span>
               </li>
@@ -215,7 +215,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
               <h3 className="text-2xl md:text-3xl font-extrabold mb-4 bg-gradient-to-r from-black via-gray-900 to-black bg-clip-text text-transparent relative z-10">
                 {isArabic ? 'فترة التقديم:' : 'Application Period:'}
               </h3>
-              <p className="text-gray-900 mb-1 text-xl font-bold relative z-10 flex items-center gap-3">
+              <p className="text-gray-100 mb-1 text-xl font-bold relative z-10 flex items-center gap-3">
                 <span className="text-3xl transform group-hover:scale-110 transition-transform duration-300">📅</span>
                 <span>{isArabic
                   ? 'من 01/12/2025 إلى 30/12/2025'
@@ -231,34 +231,34 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
               <h3 className="text-2xl md:text-3xl font-extrabold mb-6 bg-gradient-to-r from-black via-gray-900 to-black bg-clip-text text-transparent relative z-10">
                 {isArabic ? 'خطوات التقديم:' : 'Application Steps:'}
               </h3>
-              <ol className="list-none space-y-5 text-gray-700 pl-0 relative z-10">
-                <li className="flex items-start gap-4 bg-white/70 p-4 rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300 group/item border border-gray-200 hover:border-gray-400">
+              <ol className="list-none space-y-5 text-gray-300 pl-0 relative z-10">
+                <li className="flex items-start gap-4 bg-gray-800/70 p-4 rounded-xl hover:bg-gray-700 hover:shadow-lg transition-all duration-300 group/item border border-gray-700 hover:border-gray-500">
                   <span className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-black via-gray-900 to-black text-white rounded-full flex items-center justify-center font-extrabold text-base shadow-lg group-hover/item:scale-110 transition-transform duration-300">1</span>
                   <span className="flex-1">{isArabic
                     ? 'املأ نموذج التقديم بالكامل'
                     : 'Complete the application form'}</span>
                 </li>
-                <li className="flex items-start gap-4 bg-white/70 p-4 rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300 group/item border border-gray-200 hover:border-gray-400">
+                <li className="flex items-start gap-4 bg-gray-800/70 p-4 rounded-xl hover:bg-gray-700 hover:shadow-lg transition-all duration-300 group/item border border-gray-700 hover:border-gray-500">
                   <span className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-black via-gray-900 to-black text-white rounded-full flex items-center justify-center font-extrabold text-base shadow-lg group-hover/item:scale-110 transition-transform duration-300">2</span>
-                  <span className="flex-1 text-gray-800 font-medium text-lg group-hover/item:text-black transition-colors">{isArabic
+                  <span className="flex-1 text-gray-200 font-medium text-lg group-hover/item:text-white transition-colors">{isArabic
                     ? 'قم برفع بطاقة الهوية (الوجه الأمامي والخلفي)'
                     : 'Upload your National ID (front and back)'}</span>
                 </li>
-                <li className="flex items-start gap-4 bg-white/70 p-4 rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300 group/item border border-gray-200 hover:border-gray-400">
+                <li className="flex items-start gap-4 bg-gray-800/70 p-4 rounded-xl hover:bg-gray-700 hover:shadow-lg transition-all duration-300 group/item border border-gray-700 hover:border-gray-500">
                   <span className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-black via-gray-900 to-black text-white rounded-full flex items-center justify-center font-extrabold text-base shadow-lg group-hover/item:scale-110 transition-transform duration-300">3</span>
-                  <span className="flex-1 text-gray-800 font-medium text-lg group-hover/item:text-black transition-colors">{isArabic
+                  <span className="flex-1 text-gray-200 font-medium text-lg group-hover/item:text-white transition-colors">{isArabic
                     ? 'وافق على الشروط والأحكام'
                     : 'Agree to terms and conditions'}</span>
                 </li>
-                <li className="flex items-start gap-4 bg-white/70 p-4 rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300 group/item border border-gray-200 hover:border-gray-400">
+                <li className="flex items-start gap-4 bg-gray-800/70 p-4 rounded-xl hover:bg-gray-700 hover:shadow-lg transition-all duration-300 group/item border border-gray-700 hover:border-gray-500">
                   <span className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-black via-gray-900 to-black text-white rounded-full flex items-center justify-center font-extrabold text-base shadow-lg group-hover/item:scale-110 transition-transform duration-300">4</span>
-                  <span className="flex-1 text-gray-800 font-medium text-lg group-hover/item:text-black transition-colors">{isArabic
+                  <span className="flex-1 text-gray-200 font-medium text-lg group-hover/item:text-white transition-colors">{isArabic
                     ? 'احصل على الكوبون الخاص بك فوراً'
                     : 'Receive your coupon immediately'}</span>
                 </li>
-                <li className="flex items-start gap-4 bg-white/70 p-4 rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300 group/item border border-gray-200 hover:border-gray-400">
+                <li className="flex items-start gap-4 bg-gray-800/70 p-4 rounded-xl hover:bg-gray-700 hover:shadow-lg transition-all duration-300 group/item border border-gray-700 hover:border-gray-500">
                   <span className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-black via-gray-900 to-black text-white rounded-full flex items-center justify-center font-extrabold text-base shadow-lg group-hover/item:scale-110 transition-transform duration-300">5</span>
-                  <span className="flex-1 text-gray-800 font-medium text-lg group-hover/item:text-black transition-colors">{isArabic
+                  <span className="flex-1 text-gray-200 font-medium text-lg group-hover/item:text-white transition-colors">{isArabic
                     ? 'ستتلقى تفاصيل موعد المقابلة'
                     : 'Receive interview appointment details'}</span>
                 </li>
@@ -272,7 +272,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
             dir={isArabic ? 'rtl' : 'ltr'}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-            <p className="text-sm md:text-base text-gray-900 mb-2 font-semibold relative z-10">
+            <p className="text-sm md:text-base text-gray-100 mb-2 font-semibold relative z-10">
               <strong className="text-xl flex items-center gap-3 mb-2">
                 <span className="text-2xl transform group-hover:scale-110 transition-transform duration-300">🔒</span>
                 <span className="bg-gradient-to-r from-black to-gray-800 bg-clip-text text-transparent">{isArabic ? 'تنبيه أمني:' : 'Security Notice:'}</span>
@@ -284,7 +284,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
           </div>
 
           {/* Social Sharing */}
-          <div className="mb-8 p-6 bg-gray-50 rounded-lg">
+          <div className="mb-8 p-6 bg-gray-900/50 rounded-lg">
             <SocialShare />
           </div>
 
@@ -307,7 +307,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
                 >
                   {isArabic ? 'الخطوة 1: املأ النموذج' : 'Step 1: Fill the form'}
                 </h4>
-                <p className="text-base text-gray-700 mt-2 font-semibold relative z-10">
+                <p className="text-base text-gray-300 mt-2 font-semibold relative z-10">
                   {isArabic
                     ? 'أدخل بياناتك وقم برفع بطاقة الهوية'
                     : 'Enter your details and upload ID'}
@@ -324,7 +324,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
                     ? 'الخطوة 2: احصل على الكوبون'
                     : 'Step 2: Get your coupon'}
                 </h4>
-                <p className="text-base text-gray-700 mt-2 font-semibold relative z-10">
+                <p className="text-base text-gray-300 mt-2 font-semibold relative z-10">
                   {isArabic
                     ? 'استلم الكوبون فوراً بعد إرسال الطلب'
                     : 'Receive your coupon immediately'}
@@ -341,7 +341,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
                     ? 'الخطوة 3: احضر المقابلة'
                     : 'Step 3: Attend interview'}
                 </h4>
-                <p className="text-base text-gray-700 mt-2 font-semibold relative z-10">
+                <p className="text-base text-gray-300 mt-2 font-semibold relative z-10">
                   {isArabic
                     ? 'أحضر المستندات المطلوبة في موعد المقابلة'
                     : 'Bring your documents to the interview'}
@@ -365,7 +365,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
               </span>
             </Link>
             <p
-              className="text-sm text-gray-600 mt-4"
+              className="text-sm text-gray-400 mt-4"
               dir={isArabic ? 'rtl' : 'ltr'}
             >
               {isArabic
@@ -385,7 +385,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
             <h3 className="font-black mb-3 text-2xl bg-gradient-to-r from-black via-gray-900 to-black bg-clip-text text-transparent relative z-10">
               {isArabic ? 'آمن' : 'Secure'}
             </h3>
-            <p className="text-base text-gray-700 font-semibold relative z-10">
+            <p className="text-base text-gray-300 font-semibold relative z-10">
               {isArabic ? 'مشفّر ببروتوكول SSL' : 'SSL Encrypted'}
             </p>
           </div>
@@ -395,7 +395,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
             <h3 className="font-black mb-3 text-2xl bg-gradient-to-r from-black via-gray-900 to-black bg-clip-text text-transparent relative z-10">
               {isArabic ? 'رسمي' : 'Official'}
             </h3>
-            <p className="text-base text-gray-700 font-semibold relative z-10">
+            <p className="text-base text-gray-300 font-semibold relative z-10">
               {isArabic ? 'موثّق من الوزارة' : 'Ministry Verified'}
             </p>
           </div>
@@ -405,7 +405,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
             <h3 className="font-black mb-3 text-2xl bg-gradient-to-r from-black via-gray-900 to-black bg-clip-text text-transparent relative z-10">
               {isArabic ? 'دفع آمن' : 'Secure Payment'}
             </h3>
-            <p className="text-base text-gray-700 font-semibold relative z-10">
+            <p className="text-base text-gray-300 font-semibold relative z-10">
               {isArabic ? 'محمي بواسطة Paymob' : 'Paymob Protected'}
             </p>
           </div>
