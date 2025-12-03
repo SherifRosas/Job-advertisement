@@ -30,10 +30,10 @@ export default async function HomePage() {
           <div className="container mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-xl font-bold text-white">
+                <h1 className="text-xl font-bold bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent">
                   Egyptian Ministry of Education
                 </h1>
-                <p className="text-sm text-gray-200 font-medium">وزارة التربية والتعليم</p>
+                <p className="text-sm text-yellow-300 font-medium">وزارة التربية والتعليم</p>
               </div>
 
               <div className="flex items-center space-x-4">

@@ -79,7 +79,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
                 <div className="absolute inset-0 rounded-full border-2 border-white/10 group-hover:border-white/20 transition-colors duration-500 pointer-events-none" />
               </div>
               <h1
-                className="flex-1 text-3xl md:text-5xl lg:text-6xl font-black text-center leading-tight bg-gradient-to-r from-gray-200 via-white to-gray-200 bg-clip-text text-transparent relative"
+                className="flex-1 text-3xl md:text-5xl lg:text-6xl font-black text-center leading-tight bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent relative"
                 dir={isArabic ? 'rtl' : 'ltr'}
               >
                 <span className="relative z-10">
@@ -87,7 +87,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
                     ? 'مدير حسابات بوزارة التربية والتعليم المصرية'
                     : 'Accounts Manager at the Egyptian Ministry of Education'}
                 </span>
-                <span className="absolute inset-0 bg-gradient-to-r from-gray-400 via-gray-300 to-gray-400 bg-clip-text text-transparent blur-sm opacity-30" aria-hidden="true">
+                <span className="absolute inset-0 bg-gradient-to-r from-yellow-500 via-yellow-400 to-yellow-500 bg-clip-text text-transparent blur-sm opacity-30" aria-hidden="true">
                   {isArabic
                     ? 'مدير حسابات بوزارة التربية والتعليم المصرية'
                     : 'Accounts Manager at the Egyptian Ministry of Education'}
@@ -114,7 +114,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
                 : 'مدير حسابات بوزارة التربية والتعليم المصرية'}
             </p>
             <div
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 text-white px-8 py-4 rounded-full text-sm font-extrabold shadow-2xl hover:shadow-[0_15px_40px_rgba(0,0,0,0.3)] transform hover:scale-110 transition-all duration-500 border-2 border-gray-800 hover:border-gray-600 relative overflow-hidden group"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-600 via-yellow-500 to-yellow-600 text-black px-8 py-4 rounded-full text-sm font-extrabold shadow-2xl hover:shadow-[0_15px_40px_rgba(255,215,0,0.5)] transform hover:scale-110 transition-all duration-500 border-2 border-yellow-400 hover:border-yellow-300 relative overflow-hidden group"
               dir={isArabic ? 'rtl' : 'ltr'}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
@@ -129,7 +129,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
           {/* Job Description */}
           <div className="prose max-w-none mb-8 mt-10">
             <h2
-              className="text-3xl md:text-4xl lg:text-5xl font-black mb-8 bg-gradient-to-r from-gray-200 via-white to-gray-200 bg-clip-text text-transparent relative"
+              className="text-3xl md:text-4xl lg:text-5xl font-black mb-8 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent relative"
               dir={isArabic ? 'rtl' : 'ltr'}
             >
               <span className="relative z-10">{isArabic ? 'وصف الوظيفة' : 'Job Description'}</span>
@@ -148,7 +148,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
 
             {/* Required Experience */}
             <h3
-              className="text-2xl md:text-3xl font-extrabold mt-10 mb-6 bg-gradient-to-r from-gray-200 via-white to-gray-200 bg-clip-text text-transparent relative"
+              className="text-2xl md:text-3xl font-extrabold mt-10 mb-6 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent relative"
               dir={isArabic ? 'rtl' : 'ltr'}
             >
               <span className="relative z-10 flex items-center gap-3">
@@ -182,7 +182,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
 
             {/* Qualifications */}
             <h3
-              className="text-2xl md:text-3xl font-extrabold mt-10 mb-6 bg-gradient-to-r from-gray-200 via-white to-gray-200 bg-clip-text text-transparent relative"
+              className="text-2xl md:text-3xl font-extrabold mt-10 mb-6 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent relative"
               dir={isArabic ? 'rtl' : 'ltr'}
             >
               <span className="relative z-10 flex items-center gap-3">
@@ -214,7 +214,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
               dir={isArabic ? 'rtl' : 'ltr'}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-              <h3 className="text-2xl md:text-3xl font-extrabold mb-4 bg-gradient-to-r from-gray-200 via-white to-gray-200 bg-clip-text text-transparent relative z-10">
+              <h3 className="text-2xl md:text-3xl font-extrabold mb-4 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent relative z-10">
                 {isArabic ? 'فترة التقديم:' : 'Application Period:'}
               </h3>
               <p className="text-white mb-1 text-xl font-bold relative z-10 flex items-center gap-3">
@@ -230,7 +230,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
               dir={isArabic ? 'rtl' : 'ltr'}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-              <h3 className="text-2xl md:text-3xl font-extrabold mb-6 bg-gradient-to-r from-gray-200 via-white to-gray-200 bg-clip-text text-transparent relative z-10">
+              <h3 className="text-2xl md:text-3xl font-extrabold mb-6 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent relative z-10">
                 {isArabic ? 'خطوات التقديم:' : 'Application Steps:'}
               </h3>
               <ol className="list-none space-y-5 text-white pl-0 relative z-10">
@@ -277,7 +277,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
             <p className="text-sm md:text-base text-white mb-2 font-semibold relative z-10">
               <strong className="text-xl flex items-center gap-3 mb-2">
                 <span className="text-2xl transform group-hover:scale-110 transition-transform duration-300">🔒</span>
-                <span className="bg-gradient-to-r from-gray-200 to-white bg-clip-text text-transparent">{isArabic ? 'تنبيه أمني:' : 'Security Notice:'}</span>
+                <span className="bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent">{isArabic ? 'تنبيه أمني:' : 'Security Notice:'}</span>
               </strong>{' '}
               {isArabic
                 ? 'هذا إعلان رسمي من وزارة التربية والتعليم المصرية. جميع المحتويات محمية ولا يمكن نسخها أو لصقها أو التقاط لقطات شاشة منها. يرجى التأكد من أنك تتقدم من خلال النطاق الرسمي فقط.'
@@ -294,7 +294,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
           <div className="bg-gradient-to-br from-white via-gray-50 to-white p-10 rounded-3xl mb-10 border-2 border-gray-300 shadow-2xl hover:shadow-[0_30px_80px_rgba(0,0,0,0.15)] transition-all duration-500 relative overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
             <h3
-              className="text-3xl md:text-4xl lg:text-5xl font-black mb-8 text-center bg-gradient-to-r from-gray-200 via-white to-gray-200 bg-clip-text text-transparent relative z-10"
+              className="text-3xl md:text-4xl lg:text-5xl font-black mb-8 text-center bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent relative z-10"
               dir={isArabic ? 'rtl' : 'ltr'}
             >
               {isArabic ? 'كيفية التقديم' : 'How to Apply'}
@@ -304,7 +304,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
                 <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500" />
                 <div className="text-6xl mb-5 transform hover:scale-125 transition-transform duration-500 relative z-10">📝</div>
                 <h4
-                  className="font-black mb-4 text-xl bg-gradient-to-r from-gray-200 via-white to-gray-200 bg-clip-text text-transparent relative z-10"
+                  className="font-black mb-4 text-xl bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent relative z-10"
                   dir={isArabic ? 'rtl' : 'ltr'}
                 >
                   {isArabic ? 'الخطوة 1: املأ النموذج' : 'Step 1: Fill the form'}
@@ -319,7 +319,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
                 <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500" />
                 <div className="text-6xl mb-5 transform hover:scale-125 transition-transform duration-500 relative z-10">✅</div>
                 <h4
-                  className="font-black mb-4 text-xl bg-gradient-to-r from-gray-200 via-white to-gray-200 bg-clip-text text-transparent relative z-10"
+                  className="font-black mb-4 text-xl bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent relative z-10"
                   dir={isArabic ? 'rtl' : 'ltr'}
                 >
                   {isArabic
@@ -336,7 +336,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
                 <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover/item:opacity-100 transition-opacity duration-500" />
                 <div className="text-6xl mb-5 transform hover:scale-125 transition-transform duration-500 relative z-10">📅</div>
                 <h4
-                  className="font-black mb-4 text-xl bg-gradient-to-r from-gray-200 via-white to-gray-200 bg-clip-text text-transparent relative z-10"
+                  className="font-black mb-4 text-xl bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent relative z-10"
                   dir={isArabic ? 'rtl' : 'ltr'}
                 >
                   {isArabic
@@ -384,7 +384,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
           <div className="glass-effect rounded-2xl shadow-2xl p-8 text-center hover:shadow-[0_25px_60px_rgba(0,0,0,0.2)] transform hover:scale-110 hover:-translate-y-2 transition-all duration-500 border-2 border-white/30 hover:border-white/50 relative overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="text-6xl mb-5 transform hover:scale-125 transition-transform duration-500 relative z-10">🔒</div>
-            <h3 className="font-black mb-3 text-2xl bg-gradient-to-r from-gray-200 via-white to-gray-200 bg-clip-text text-transparent relative z-10">
+            <h3 className="font-black mb-3 text-2xl bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent relative z-10">
               {isArabic ? 'آمن' : 'Secure'}
             </h3>
             <p className="text-base text-white font-semibold relative z-10">
@@ -394,7 +394,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
           <div className="glass-effect rounded-2xl shadow-2xl p-8 text-center hover:shadow-[0_25px_60px_rgba(0,0,0,0.2)] transform hover:scale-110 hover:-translate-y-2 transition-all duration-500 border-2 border-white/30 hover:border-white/50 relative overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="text-6xl mb-5 transform hover:scale-125 transition-transform duration-500 relative z-10">✅</div>
-            <h3 className="font-black mb-3 text-2xl bg-gradient-to-r from-gray-200 via-white to-gray-200 bg-clip-text text-transparent relative z-10">
+            <h3 className="font-black mb-3 text-2xl bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent relative z-10">
               {isArabic ? 'رسمي' : 'Official'}
             </h3>
             <p className="text-base text-white font-semibold relative z-10">
@@ -404,7 +404,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
           <div className="glass-effect rounded-2xl shadow-2xl p-8 text-center hover:shadow-[0_25px_60px_rgba(0,0,0,0.2)] transform hover:scale-110 hover:-translate-y-2 transition-all duration-500 border-2 border-white/30 hover:border-white/50 relative overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="text-6xl mb-5 transform hover:scale-125 transition-transform duration-500 relative z-10">💳</div>
-            <h3 className="font-black mb-3 text-2xl bg-gradient-to-r from-gray-200 via-white to-gray-200 bg-clip-text text-transparent relative z-10">
+            <h3 className="font-black mb-3 text-2xl bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent relative z-10">
               {isArabic ? 'دفع آمن' : 'Secure Payment'}
             </h3>
             <p className="text-base text-white font-semibold relative z-10">
