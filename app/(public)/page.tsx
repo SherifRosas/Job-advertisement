@@ -30,16 +30,16 @@ export default async function HomePage() {
           <div className="container mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-xl font-bold text-gray-200">
+                <h1 className="text-xl font-bold text-white">
                   Egyptian Ministry of Education
                 </h1>
-                <p className="text-sm text-gray-400">وزارة التربية والتعليم</p>
+                <p className="text-sm text-gray-200 font-medium">وزارة التربية والتعليم</p>
               </div>
 
               <div className="flex items-center space-x-4">
                 <Link
                   href="/admin/login"
-                  className="text-sm text-gray-300 hover:text-white px-3 py-1 rounded hover:bg-gray-800 transition-colors"
+                  className="text-sm text-white hover:text-gray-100 px-3 py-1 rounded hover:bg-gray-800 transition-colors font-medium"
                 >
                   Admin Login
                 </Link>
