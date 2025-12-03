@@ -24,22 +24,22 @@ export default async function HomePage() {
   return (
     <>
       <ContentProtection />
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+      <div className="min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900">
         {/* Header */}
-        <header className="bg-white shadow-md">
+        <header className="bg-black/50 backdrop-blur-sm border-b border-gray-800 shadow-lg">
           <div className="container mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-xl font-bold text-gray-800">
+                <h1 className="text-xl font-bold text-gray-200">
                   Egyptian Ministry of Education
                 </h1>
-                <p className="text-sm text-gray-600">وزارة التربية والتعليم</p>
+                <p className="text-sm text-gray-400">وزارة التربية والتعليم</p>
               </div>
 
               <div className="flex items-center space-x-4">
                 <Link
                   href="/admin/login"
-                  className="text-sm text-gray-600 hover:text-gray-800 px-3 py-1 rounded hover:bg-gray-100"
+                  className="text-sm text-gray-300 hover:text-white px-3 py-1 rounded hover:bg-gray-800 transition-colors"
                 >
                   Admin Login
                 </Link>
