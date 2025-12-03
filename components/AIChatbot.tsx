@@ -11,10 +11,29 @@ export default function AIChatbot() {
     {
       role: 'assistant',
       content: isArabic
-        ? 'مرحباً! يمكنني مساعدتك في الإجابة على أسئلتك حول وظيفة مدير الحسابات بوزارة التربية والتعليم. كيف يمكنني مساعدتك اليوم؟'
-        : 'Hello! I can help you with questions about the Accounts Manager position at the Egyptian Ministry of Education. How can I assist you today?',
+        ? 'مرحباً! أنا "نافير" - مساعدك الذكي لدعم طلبات التوظيف. يمكنني مساعدتك في:\n\n📋 الإجابة على أسئلة الوظيفة\n📝 شرح خطوات التقديم\n📅 معلومات عن المقابلات\n📄 المستندات المطلوبة\n\nكيف يمكنني مساعدتك اليوم؟'
+        : 'Hello! I\'m "Numerous" - your smart job application support assistant. I can help you with:\n\n📋 Job-related questions\n📝 Application process steps\n📅 Interview information\n📄 Required documents\n\nHow can I assist you today?',
     },
   ])
+  
+  // Suggested questions
+  const suggestedQuestions = isArabic
+    ? [
+        'ما هي متطلبات الوظيفة؟',
+        'كيف أقدّم طلب التوظيف؟',
+        'ما هي المستندات المطلوبة للمقابلة؟',
+        'ما هو موعد آخر يوم للتقديم؟',
+        'أين ستكون المقابلة؟',
+        'ما هي خطوات التقديم؟',
+      ]
+    : [
+        'What are the job requirements?',
+        'How do I submit my application?',
+        'What documents do I need for the interview?',
+        'When is the application deadline?',
+        'Where will the interview be held?',
+        'What are the application steps?',
+      ]
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
@@ -26,23 +45,28 @@ export default function AIChatbot() {
         {
           role: 'assistant',
           content: isArabic
-            ? 'مرحباً! يمكنني مساعدتك في الإجابة على أسئلتك حول وظيفة مدير الحسابات بوزارة التربية والتعليم. كيف يمكنني مساعدتك اليوم؟'
-            : 'Hello! I can help you with questions about the Accounts Manager position at the Egyptian Ministry of Education. How can I assist you today?',
+            ? 'مرحباً! أنا "نافير" - مساعدك الذكي لدعم طلبات التوظيف. يمكنني مساعدتك في:\n\n📋 الإجابة على أسئلة الوظيفة\n📝 شرح خطوات التقديم\n📅 معلومات عن المقابلات\n📄 المستندات المطلوبة\n\nكيف يمكنني مساعدتك اليوم؟'
+            : 'Hello! I\'m "Numerous" - your smart job application support assistant. I can help you with:\n\n📋 Job-related questions\n📝 Application process steps\n📅 Interview information\n📄 Required documents\n\nHow can I assist you today?',
         },
       ])
     }
   }, [isArabic, messages.length])
+  
+  // Handle suggested question click
+  const handleSuggestedQuestion = (question: string) => {
+    handleSend(question)
+  }
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
-  const handleSend = async () => {
-    if (!input.trim() || loading) return
+  const handleSend = async (messageToSend?: string) => {
+    const message = messageToSend || input.trim()
+    if (!message || loading) return
 
-    const userMessage = input.trim()
     setInput('')
-    setMessages((prev) => [...prev, { role: 'user', content: userMessage }])
+    setMessages((prev) => [...prev, { role: 'user', content: message }])
     setLoading(true)
 
     try {
@@ -53,7 +77,7 @@ export default function AIChatbot() {
       const response = await fetch('/api/ai/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userMessage }),
+        body: JSON.stringify({ message }),
         signal: controller.signal,
       })
 
@@ -161,6 +185,28 @@ export default function AIChatbot() {
                 </div>
               </div>
             )}
+            
+            {/* Show suggested questions only when there's just the welcome message */}
+            {messages.length === 1 && !loading && (
+              <div className="space-y-2 mt-4">
+                <p className="text-xs text-gray-500 font-medium px-2">
+                  {isArabic ? 'اقتراحات الأسئلة:' : 'Suggested questions:'}
+                </p>
+                <div className="grid grid-cols-1 gap-2">
+                  {suggestedQuestions.map((question, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => handleSuggestedQuestion(question)}
+                      className="text-left px-4 py-2 bg-white border-2 border-blue-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-all text-sm text-gray-700 hover:text-blue-700 shadow-sm hover:shadow-md"
+                      dir={isArabic ? 'rtl' : 'ltr'}
+                    >
+                      {question}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+            
             <div ref={messagesEndRef} />
           </div>
 

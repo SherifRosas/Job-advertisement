@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import OpenAI from 'openai'
 
-const SYSTEM_PROMPT = `You are a helpful AI assistant for the Egyptian Ministry of Education job advertisement system. 
-You help applicants with questions about the Accounts Manager position.
+const SYSTEM_PROMPT = `You are "Numerous" (نافير), a helpful AI support assistant for the Egyptian Ministry of Education job advertisement system. 
+Your role is to help applicants with questions about the Accounts Manager position and the application process.
 
-Key information:
+Key Job Information:
 - Position: Accounts Manager (مدير حسابات)
 - Organization: Egyptian Ministry of Education (وزارة التربية والتعليم المصرية)
 - Application Period: From 1/12/2025 to 30/12/2025
@@ -13,8 +13,15 @@ Key information:
 - Interview Period: 15/12/2025 to 31/12/2025, 10:00 AM to 2:00 PM (excluding Thursdays, Fridays, Saturdays)
 - Interview Location: Egyptian Ministry of Education - Cairo/Giza (near the Pyramids) - https://maps.google.com/?q=29.976688,31.309752
 
-Be helpful, professional, and provide accurate information. If you don't know something, say so.
-Respond in the same language as the user's question (Arabic or English). If the question is in Arabic, respond in Arabic. If in English, respond in English.`
+Your responsibilities:
+- Answer questions about job requirements and qualifications
+- Explain the application process step-by-step
+- Provide information about interviews (dates, times, location)
+- Help with document requirements
+- Clarify payment and coupon procedures
+- Assist with any job-related inquiries
+
+Be helpful, professional, and clear. Always respond in the same language as the user's question (Arabic or English).`
 
 // Smart fallback answers for common questions
 function getFallbackAnswer(message: string): string | null {
@@ -54,8 +61,29 @@ function getFallbackAnswer(message: string): string | null {
     {
       keywords: ['hello', 'hi', 'مرحبا', 'السلام'],
       answer: {
-        ar: 'مرحباً! كيف يمكنني مساعدتك اليوم بخصوص وظيفة مدير الحسابات بوزارة التربية والتعليم؟',
-        en: 'Hello! How can I help you today regarding the Accounts Manager position at the Egyptian Ministry of Education?',
+        ar: 'مرحباً! أنا "نافير" - مساعدك الذكي لدعم طلبات التوظيف. كيف يمكنني مساعدتك اليوم؟',
+        en: 'Hello! I\'m "Numerous" - your smart job application support assistant. How can I help you today?',
+      },
+    },
+    {
+      keywords: ['steps', 'process', 'خطوات', 'عملية'],
+      answer: {
+        ar: 'خطوات التقديم:\n\n1️⃣ املأ نموذج التقديم بالكامل\n2️⃣ قم برفع بطاقة الهوية (الوجه الأمامي والخلفي)\n3️⃣ وافق على الشروط والأحكام\n4️⃣ احصل على الكوبون الخاص بك فوراً\n5️⃣ ستتلقى تفاصيل موعد المقابلة\n\nهل تحتاج مساعدة في أي خطوة محددة؟',
+        en: 'Application steps:\n\n1️⃣ Complete the application form\n2️⃣ Upload your National ID (front and back)\n3️⃣ Agree to terms and conditions\n4️⃣ Receive your coupon immediately\n5️⃣ You will receive interview appointment details\n\nDo you need help with any specific step?',
+      },
+    },
+    {
+      keywords: ['documents', 'papers', 'مستندات', 'أوراق'],
+      answer: {
+        ar: 'المستندات المطلوبة:\n\n📄 بطاقة الهوية الوطنية (الوجه الأمامي والخلفي)\n📄 المستندات الرسمية (ستُطلب في يوم المقابلة)\n\nتأكد من أن صور بطاقة الهوية واضحة ويمكن قراءتها.',
+        en: 'Required documents:\n\n📄 National ID card (front and back)\n📄 Official documents (will be requested on interview day)\n\nMake sure ID card photos are clear and readable.',
+      },
+    },
+    {
+      keywords: ['payment', 'pay', 'دفع', 'دفعة'],
+      answer: {
+        ar: 'معلومات الدفع:\n\n💰 المبلغ: 1,000 جنيه مصري\n💳 طرق الدفع: بطاقات الائتمان/الخصم، المحافظ الإلكترونية، التحويل البنكي\n🔒 آمن ومحمي بواسطة Paymob\n\nبعد الدفع الناجح، ستحصل على الكوبون فوراً.',
+        en: 'Payment information:\n\n💰 Amount: 1,000 Egyptian Pounds\n💳 Payment methods: Credit/Debit cards, Mobile wallets, Bank transfer\n🔒 Secure and protected by Paymob\n\nAfter successful payment, you will receive your coupon immediately.',
       },
     },
   ]
