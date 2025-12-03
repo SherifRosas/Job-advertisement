@@ -97,6 +97,30 @@ export async function POST(request: NextRequest) {
     await writeFile(backPath, Buffer.from(backBytes))
 
     // Create application
+    // Perform AI verification before creating application
+    const { verifyApplicationData } = await import('@/lib/ai-verification')
+    const verificationResult = await verifyApplicationData(
+      {
+        fullName,
+        address,
+        phoneNumber,
+      },
+      `/uploads/${frontFileName}`,
+      `/uploads/${backFileName}`
+    )
+
+    // If verification fails, return error
+    if (!verificationResult.verified) {
+      return NextResponse.json(
+        {
+          error: 'Verification failed',
+          details: verificationResult.notes,
+          confidence: verificationResult.confidence,
+        },
+        { status: 400 }
+      )
+    }
+
     const applicationId = crypto.randomUUID()
     const application = await db.createApplication({
       id: applicationId,
@@ -108,7 +132,8 @@ export async function POST(request: NextRequest) {
       nationalIdBack: `/uploads/${backFileName}`,
       requirementsAgreed,
       documentsAgreed,
-      aiVerified: false, // Will be updated by AI
+      aiVerified: verificationResult.verified,
+      aiVerificationNotes: verificationResult.notes.join('; '),
       paymentStatus: 'paid', // Skip payment for now - mark as paid
     })
 
