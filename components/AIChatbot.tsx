@@ -216,7 +216,7 @@ export default function AIChatbot() {
                   {suggestedQuestions.map((question, idx) => (
                     <button
                       key={idx}
-                      onClick={() => handleSuggestedQuestion(question)}
+                      onClick={() => handleSend(question)}
                       className="text-left px-4 py-2 bg-white border-2 border-blue-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-all text-sm text-gray-700 hover:text-blue-700 shadow-sm hover:shadow-md"
                       dir={isArabic ? 'rtl' : 'ltr'}
                     >
@@ -246,7 +246,7 @@ export default function AIChatbot() {
                 dir={isArabic ? 'rtl' : 'ltr'}
               />
               <button
-                onClick={handleSend}
+                onClick={() => handleSend()}
                 disabled={loading || !input.trim()}
                 className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 py-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all font-semibold shadow-md hover:shadow-lg"
               >
