@@ -24,9 +24,9 @@ export default async function HomePage() {
   return (
     <>
       <ContentProtection />
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 via-slate-900 to-black">
         {/* Header */}
-        <header className="bg-black/50 backdrop-blur-sm border-b border-gray-800 shadow-lg">
+        <header className="bg-gradient-to-r from-slate-900/80 via-purple-900/60 to-slate-900/80 backdrop-blur-md border-b border-purple-500/30 shadow-2xl">
           <div className="container mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
               <div>

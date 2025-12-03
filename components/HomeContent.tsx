@@ -39,26 +39,30 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
           {/* Shimmer overlay */}
           <div className="absolute inset-0 shimmer-effect pointer-events-none opacity-30" />
           
-          {/* Animated gradient background with depth */}
-          <div className="pointer-events-none absolute inset-0 opacity-[0.08]">
-            <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 via-black to-gray-900 animate-pulse" style={{ animationDuration: '8s' }} />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_30%,_rgba(0,0,0,0.4)_0%,_transparent_60%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_70%,_rgba(31,41,55,0.4)_0%,_transparent_60%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,_rgba(0,0,0,0.2)_0%,_transparent_70%)]" />
+          {/* Animated gradient background with fantasy colors */}
+          <div className="pointer-events-none absolute inset-0 opacity-[0.15]">
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-900/40 via-blue-900/30 to-yellow-900/20 animate-pulse" style={{ animationDuration: '8s' }} />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_30%,_rgba(157,78,221,0.3)_0%,_transparent_60%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_70%,_rgba(255,215,0,0.2)_0%,_transparent_60%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,_rgba(74,144,226,0.25)_0%,_transparent_70%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_80%,_rgba(157,78,221,0.15)_0%,_transparent_50%)]" />
           </div>
           
-          {/* Enhanced floating particles with more sophistication */}
+          {/* Enhanced floating particles with fantasy colors */}
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
-            <div className="absolute top-20 left-10 w-3 h-3 bg-gray-700 rounded-full pulse-soft float-animation" style={{ animationDelay: '0s' }} />
-            <div className="absolute top-40 right-20 w-2 h-2 bg-gray-600 rounded-full pulse-soft float-animation" style={{ animationDelay: '1.5s' }} />
-            <div className="absolute bottom-32 left-1/4 w-2.5 h-2.5 bg-gray-800 rounded-full pulse-soft float-animation" style={{ animationDelay: '3s' }} />
-            <div className="absolute top-1/2 right-1/3 w-1.5 h-1.5 bg-gray-900/500 rounded-full pulse-soft float-animation" style={{ animationDelay: '4.5s' }} />
-            <div className="absolute bottom-20 right-1/4 w-2 h-2 bg-gray-700 rounded-full pulse-soft float-animation" style={{ animationDelay: '6s' }} />
+            <div className="absolute top-20 left-10 w-3 h-3 bg-yellow-400 rounded-full pulse-soft float-animation shadow-[0_0_10px_rgba(255,215,0,0.6)]" style={{ animationDelay: '0s' }} />
+            <div className="absolute top-40 right-20 w-2 h-2 bg-purple-400 rounded-full pulse-soft float-animation shadow-[0_0_8px_rgba(157,78,221,0.6)]" style={{ animationDelay: '1.5s' }} />
+            <div className="absolute bottom-32 left-1/4 w-2.5 h-2.5 bg-blue-400 rounded-full pulse-soft float-animation shadow-[0_0_10px_rgba(74,144,226,0.6)]" style={{ animationDelay: '3s' }} />
+            <div className="absolute top-1/2 right-1/3 w-1.5 h-1.5 bg-yellow-300 rounded-full pulse-soft float-animation shadow-[0_0_6px_rgba(255,215,0,0.5)]" style={{ animationDelay: '4.5s' }} />
+            <div className="absolute bottom-20 right-1/4 w-2 h-2 bg-purple-300 rounded-full pulse-soft float-animation shadow-[0_0_8px_rgba(157,78,221,0.5)]" style={{ animationDelay: '6s' }} />
+            <div className="absolute top-60 left-1/3 w-2 h-2 bg-blue-300 rounded-full pulse-soft float-animation shadow-[0_0_8px_rgba(74,144,226,0.5)]" style={{ animationDelay: '7.5s' }} />
           </div>
           
-          {/* Subtle border glow effect */}
-          <div className="absolute inset-0 rounded-3xl border border-white/20 pointer-events-none" />
-          <div className="absolute inset-[1px] rounded-3xl border border-black/5 pointer-events-none" />
+          {/* Enhanced border glow effect with fantasy colors */}
+          <div className="absolute inset-0 rounded-3xl border-2 border-transparent bg-gradient-to-r from-yellow-400/30 via-purple-400/30 via-blue-400/30 to-yellow-400/30 rounded-[inherit] p-[2px] pointer-events-none">
+            <div className="w-full h-full rounded-[inherit] bg-transparent" />
+          </div>
+          <div className="absolute inset-[3px] rounded-3xl border border-yellow-500/20 pointer-events-none" />
 
           <div className="relative">
            <div className="text-center mb-8">
@@ -79,7 +83,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
                 <div className="absolute inset-0 rounded-full border-2 border-white/10 group-hover:border-white/20 transition-colors duration-500 pointer-events-none" />
               </div>
               <h1
-                className="flex-1 text-3xl md:text-5xl lg:text-6xl font-black text-center leading-tight bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent relative"
+                className="flex-1 text-3xl md:text-5xl lg:text-6xl font-black text-center leading-tight bg-gradient-to-r from-yellow-400 via-purple-400 via-yellow-300 via-blue-400 to-yellow-500 bg-clip-text text-transparent relative bg-[length:200%_100%] animate-[gradient-shift_5s_ease_infinite]"
                 dir={isArabic ? 'rtl' : 'ltr'}
               >
                 <span className="relative z-10">
@@ -114,7 +118,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
                 : 'مدير حسابات بوزارة التربية والتعليم المصرية'}
             </p>
             <div
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-600 via-yellow-500 to-yellow-600 text-black px-8 py-4 rounded-full text-sm font-extrabold shadow-2xl hover:shadow-[0_15px_40px_rgba(255,215,0,0.5)] transform hover:scale-110 transition-all duration-500 border-2 border-yellow-400 hover:border-yellow-300 relative overflow-hidden group"
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-600 via-purple-600 via-yellow-500 to-yellow-600 text-white px-8 py-4 rounded-full text-sm font-extrabold shadow-[0_10px_30px_rgba(255,215,0,0.4),0_0_20px_rgba(157,78,221,0.3)] hover:shadow-[0_15px_50px_rgba(255,215,0,0.6),0_0_30px_rgba(157,78,221,0.5)] transform hover:scale-110 transition-all duration-500 border-2 border-yellow-400/50 hover:border-purple-400/70 relative overflow-hidden group"
               dir={isArabic ? 'rtl' : 'ltr'}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
@@ -129,7 +133,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
           {/* Job Description */}
           <div className="prose max-w-none mb-8 mt-10">
             <h2
-              className="text-3xl md:text-4xl lg:text-5xl font-black mb-8 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent relative"
+              className="text-3xl md:text-4xl lg:text-5xl font-black mb-8 bg-gradient-to-r from-yellow-400 via-purple-400 via-yellow-300 via-blue-400 to-yellow-500 bg-clip-text text-transparent relative bg-[length:200%_100%] animate-[gradient-shift_5s_ease_infinite]"
               dir={isArabic ? 'rtl' : 'ltr'}
             >
               <span className="relative z-10">{isArabic ? 'وصف الوظيفة' : 'Job Description'}</span>
@@ -148,7 +152,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
 
             {/* Required Experience */}
             <h3
-              className="text-2xl md:text-3xl font-extrabold mt-10 mb-6 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent relative"
+              className="text-2xl md:text-3xl font-extrabold mt-10 mb-6 bg-gradient-to-r from-yellow-400 via-purple-400 to-yellow-500 bg-clip-text text-transparent relative"
               dir={isArabic ? 'rtl' : 'ltr'}
             >
               <span className="relative z-10 flex items-center gap-3">
@@ -182,7 +186,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
 
             {/* Qualifications */}
             <h3
-              className="text-2xl md:text-3xl font-extrabold mt-10 mb-6 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent relative"
+              className="text-2xl md:text-3xl font-extrabold mt-10 mb-6 bg-gradient-to-r from-yellow-400 via-purple-400 to-yellow-500 bg-clip-text text-transparent relative"
               dir={isArabic ? 'rtl' : 'ltr'}
             >
               <span className="relative z-10 flex items-center gap-3">
@@ -356,7 +360,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
           <div className="text-center mt-10">
             <Link
               href="/apply"
-              className="inline-block bg-gradient-to-r from-yellow-600 via-yellow-500 to-yellow-600 hover:from-yellow-500 hover:via-yellow-400 hover:to-yellow-500 text-black font-black py-7 px-20 rounded-2xl text-xl md:text-2xl lg:text-3xl transition-all duration-500 shadow-[0_20px_60px_rgba(255,215,0,0.4)] hover:shadow-[0_30px_80px_rgba(255,215,0,0.6)] transform hover:scale-110 hover:-translate-y-3 relative overflow-hidden group border-2 border-yellow-400 hover:border-yellow-300"
+              className="inline-block bg-gradient-to-r from-yellow-600 via-purple-600 via-yellow-500 via-blue-600 to-yellow-600 hover:from-yellow-500 hover:via-purple-500 hover:via-yellow-400 hover:via-blue-500 hover:to-yellow-500 text-white font-black py-7 px-20 rounded-2xl text-xl md:text-2xl lg:text-3xl transition-all duration-500 shadow-[0_20px_60px_rgba(255,215,0,0.5),0_0_40px_rgba(157,78,221,0.4)] hover:shadow-[0_30px_100px_rgba(255,215,0,0.7),0_0_60px_rgba(157,78,221,0.6),0_0_40px_rgba(74,144,226,0.5)] transform hover:scale-110 hover:-translate-y-3 relative overflow-hidden group border-2 border-yellow-400/60 hover:border-purple-400/80"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
               <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
