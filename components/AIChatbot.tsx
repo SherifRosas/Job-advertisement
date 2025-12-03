@@ -31,7 +31,7 @@ export default function AIChatbot() {
         },
       ])
     }
-  }, [isArabic])
+  }, [isArabic, messages.length])
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })

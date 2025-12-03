@@ -6,9 +6,9 @@ import Link from 'next/link'
 import ApplicationActions from '@/components/ApplicationActions'
 
 interface PageProps {
-  searchParams?: {
+  searchParams?: Promise<{
     status?: string
-  }
+  }>
 }
 
 export default async function ApplicationsPage({ searchParams }: PageProps) {
@@ -37,7 +37,8 @@ export default async function ApplicationsPage({ searchParams }: PageProps) {
     })
   )
 
-  const filterStatus = (searchParams?.status || 'all').toLowerCase()
+  const resolvedSearchParams = await searchParams
+  const filterStatus = (resolvedSearchParams?.status || 'all').toLowerCase()
   const applications = applicationsWithRelations.filter((app) => {
     if (filterStatus === 'all') return true
     const status = (app.selectionStatus || 'pending').toLowerCase()
