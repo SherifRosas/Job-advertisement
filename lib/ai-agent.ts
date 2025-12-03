@@ -206,7 +206,7 @@ class AIAgent {
 
   private async executeSocialPost(task: AgentTask): Promise<CampaignResult> {
     // Generate content if not provided
-    if (!task.content) {
+    if (!task.content && task.platform && task.platform !== 'email') {
       task.content = await this.generateContent('social_post', task.platform, 'ar')
     }
 
