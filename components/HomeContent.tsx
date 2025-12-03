@@ -356,7 +356,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
           <div className="text-center mt-10">
             <Link
               href="/apply"
-              className="inline-block bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 hover:from-gray-600 hover:via-gray-500 hover:to-gray-600 text-white font-black py-7 px-20 rounded-2xl text-xl md:text-2xl lg:text-3xl transition-all duration-500 shadow-[0_20px_60px_rgba(0,0,0,0.3)] hover:shadow-[0_30px_80px_rgba(0,0,0,0.5)] transform hover:scale-110 hover:-translate-y-3 relative overflow-hidden group border-2 border-gray-800 hover:border-gray-600"
+              className="inline-block bg-gradient-to-r from-yellow-600 via-yellow-500 to-yellow-600 hover:from-yellow-500 hover:via-yellow-400 hover:to-yellow-500 text-black font-black py-7 px-20 rounded-2xl text-xl md:text-2xl lg:text-3xl transition-all duration-500 shadow-[0_20px_60px_rgba(255,215,0,0.4)] hover:shadow-[0_30px_80px_rgba(255,215,0,0.6)] transform hover:scale-110 hover:-translate-y-3 relative overflow-hidden group border-2 border-yellow-400 hover:border-yellow-300"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
               <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
