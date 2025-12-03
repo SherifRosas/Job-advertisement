@@ -246,7 +246,8 @@ class AIAgent {
   }
 
   private async executeContentGeneration(task: AgentTask): Promise<CampaignResult> {
-    const content = await this.generateContent('social_post', task.platform, 'ar')
+    const platform = task.platform && task.platform !== 'email' ? task.platform : undefined
+    const content = await this.generateContent('social_post', platform, 'ar')
 
     return {
       taskId: task.id,
