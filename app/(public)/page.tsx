@@ -37,6 +37,25 @@ export default async function HomePage() {
               </div>
 
               <div className="flex items-center space-x-4">
+                {/* Contact Support */}
+                <div className="flex items-center gap-3">
+                  <a
+                    href="tel:+201205465036"
+                    className="flex items-center gap-1 text-sm text-gray-700 hover:text-purple-600 px-3 py-1 rounded hover:bg-purple-50 transition-colors font-medium"
+                    title="Call Support: 01205465036"
+                  >
+                    <span>📞</span>
+                    <span className="hidden md:inline">01205465036</span>
+                  </a>
+                  <a
+                    href="mailto:optimumoptimum959@gmail.com"
+                    className="flex items-center gap-1 text-sm text-gray-700 hover:text-purple-600 px-3 py-1 rounded hover:bg-purple-50 transition-colors font-medium"
+                    title="Email Support"
+                  >
+                    <span>✉️</span>
+                    <span className="hidden md:inline">Support</span>
+                  </a>
+                </div>
                 <Link
                   href="/admin/login"
                   className="text-sm text-gray-700 hover:text-purple-600 px-3 py-1 rounded hover:bg-purple-50 transition-colors font-medium"

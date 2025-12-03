@@ -31,6 +31,18 @@ export default function CopyrightFooter() {
                 </Link>
               </li>
               <li>
+                <a href="tel:+201205465036" className="text-gray-400 hover:text-white flex items-center gap-2">
+                  <span>📞</span>
+                  <span>Call Support: 01205465036</span>
+                </a>
+              </li>
+              <li>
+                <a href="mailto:optimumoptimum959@gmail.com" className="text-gray-400 hover:text-white flex items-center gap-2">
+                  <span>✉️</span>
+                  <span>Email Support</span>
+                </a>
+              </li>
+              <li>
                 <Link href="/terms" className="text-gray-400 hover:text-white">
                   Terms of Service
                 </Link>

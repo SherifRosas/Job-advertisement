@@ -135,13 +135,33 @@ export default function AIChatbot() {
             <h3 className="font-bold text-lg">
               {isArabic ? 'المساعد الآلي' : 'AI Assistant'}
             </h3>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="text-white hover:text-gray-200 transition-colors text-xl font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/20"
-              aria-label={isArabic ? 'إغلاق' : 'Close'}
-            >
-              ✕
-            </button>
+            <div className="flex items-center gap-2">
+              {/* Contact Support - Phone */}
+              <a
+                href="tel:+201205465036"
+                className="text-white hover:text-gray-200 transition-colors text-lg font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/20"
+                aria-label={isArabic ? 'اتصل بالدعم' : 'Call Support'}
+                title={isArabic ? 'اتصل: 01205465036' : 'Call: 01205465036'}
+              >
+                📞
+              </a>
+              {/* Contact Support - Email */}
+              <a
+                href="mailto:optimumoptimum959@gmail.com"
+                className="text-white hover:text-gray-200 transition-colors text-lg font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/20"
+                aria-label={isArabic ? 'راسل الدعم' : 'Email Support'}
+                title="optimumoptimum959@gmail.com"
+              >
+                ✉️
+              </a>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="text-white hover:text-gray-200 transition-colors text-xl font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/20"
+                aria-label={isArabic ? 'إغلاق' : 'Close'}
+              >
+                ✕
+              </button>
+            </div>
           </div>
 
           <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
