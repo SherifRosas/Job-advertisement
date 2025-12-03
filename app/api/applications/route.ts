@@ -133,7 +133,6 @@ export async function POST(request: NextRequest) {
       requirementsAgreed,
       documentsAgreed,
       aiVerified: verificationResult.verified,
-      aiVerificationNotes: verificationResult.notes.join('; '),
       paymentStatus: 'paid', // Skip payment for now - mark as paid
     })
 
