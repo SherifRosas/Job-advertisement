@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --background: linear-gradient(135deg, #0f0c29 0%, #302b63 25%, #24243e 50%, #1a1a2e 75%, #0a0a0a 100%);
-  --background-solid: #0a0a0a;
-  --foreground: #f0f0f0;
+  --background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+  --background-solid: #f8f9fa;
+  --foreground: #1a1a1a;
   --accent: #6a4c93;
-  --accent-soft: #4a2c6a;
+  --accent-soft: #e8e4f0;
   --gold: #FFD700;
   --gold-light: #FFA500;
   --purple: #9d4edd;
@@ -27,9 +27,9 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Improve text readability on dark backgrounds */
+/* Improve text readability */
 p, li, span, div {
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 body::before {
@@ -57,14 +57,14 @@ body::before {
 h1, h2, h3, h4 {
   letter-spacing: -0.02em;
   font-weight: 800;
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 25%, #9d4edd 50%, #FFD700 75%, #FFA500 100%);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #667eea 100%);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0 2px 12px rgba(255, 215, 0, 0.6), 0 0 20px rgba(157, 78, 221, 0.4);
+  text-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
   animation: gradient-shift-text 5s ease infinite;
-  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5));
+  filter: drop-shadow(0 0 4px rgba(102, 126, 234, 0.4));
 }
 
 @keyframes gradient-shift-text {
@@ -111,17 +111,17 @@ a:focus-visible {
   }
   
   .glass-effect {
-    background: linear-gradient(135deg, rgba(30, 30, 50, 0.85) 0%, rgba(20, 20, 40, 0.9) 50%, rgba(30, 30, 50, 0.85) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.85) 50%, rgba(255, 255, 255, 0.9) 100%);
     backdrop-filter: blur(40px) saturate(180%);
     -webkit-backdrop-filter: blur(40px) saturate(180%);
     border: 2px solid;
-    border-image: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(157, 78, 221, 0.3), rgba(74, 144, 226, 0.3), rgba(255, 215, 0, 0.3)) 1;
+    border-image: linear-gradient(135deg, rgba(102, 126, 234, 0.4), rgba(118, 75, 162, 0.4), rgba(240, 147, 251, 0.4), rgba(79, 172, 254, 0.4)) 1;
     box-shadow: 
-      0 8px 32px 0 rgba(0, 0, 0, 0.6),
-      0 0 60px rgba(255, 215, 0, 0.1),
-      0 0 40px rgba(157, 78, 221, 0.1),
-      0 0 0 1px rgba(255, 255, 255, 0.15) inset,
-      0 0 20px rgba(255, 215, 0, 0.05) inset;
+      0 8px 32px 0 rgba(102, 126, 234, 0.2),
+      0 0 60px rgba(118, 75, 162, 0.15),
+      0 0 40px rgba(240, 147, 251, 0.1),
+      0 0 0 1px rgba(255, 255, 255, 0.8) inset,
+      0 0 20px rgba(255, 255, 255, 0.3) inset;
     position: relative;
   }
   

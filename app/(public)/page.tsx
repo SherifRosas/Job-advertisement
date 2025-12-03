@@ -24,22 +24,22 @@ export default async function HomePage() {
   return (
     <>
       <ContentProtection />
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 via-slate-900 to-black">
+      <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-100 via-pink-100 to-blue-100">
         {/* Header */}
-        <header className="bg-gradient-to-r from-slate-900/80 via-purple-900/60 to-slate-900/80 backdrop-blur-md border-b border-purple-500/30 shadow-2xl">
+        <header className="bg-gradient-to-r from-white/90 via-purple-50/90 to-white/90 backdrop-blur-md border-b border-purple-200 shadow-lg">
           <div className="container mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-xl font-bold bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent">
+                <h1 className="text-xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
                   Egyptian Ministry of Education
                 </h1>
-                <p className="text-sm text-yellow-300 font-medium">وزارة التربية والتعليم</p>
+                <p className="text-sm text-gray-700 font-medium">وزارة التربية والتعليم</p>
               </div>
 
               <div className="flex items-center space-x-4">
                 <Link
                   href="/admin/login"
-                  className="text-sm text-white hover:text-gray-100 px-3 py-1 rounded hover:bg-gray-800 transition-colors font-medium"
+                  className="text-sm text-gray-700 hover:text-purple-600 px-3 py-1 rounded hover:bg-purple-50 transition-colors font-medium"
                 >
                   Admin Login
                 </Link>
