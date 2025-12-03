@@ -123,6 +123,14 @@ export default async function AdminDashboard() {
             <h3 className="text-lg font-bold mb-2">Messages</h3>
             <p className="text-gray-600">View and manage automated messages</p>
           </Link>
+
+          <Link
+            href="/admin/campaigns"
+            className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition"
+          >
+            <h3 className="text-lg font-bold mb-2">Marketing Campaigns</h3>
+            <p className="text-gray-600">Create and manage automated marketing campaigns</p>
+          </Link>
         </div>
       </main>
     </div>

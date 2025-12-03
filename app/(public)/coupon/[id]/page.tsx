@@ -15,6 +15,7 @@ export default function CouponPage() {
   const [application, setApplication] = useState<any>(null)
   const [appointment, setAppointment] = useState<any>(null)
   const [loading, setLoading] = useState(true)
+  const [copied, setCopied] = useState(false)
 
   useEffect(() => {
     async function fetchData() {
@@ -224,6 +225,20 @@ export default function CouponPage() {
                     >
                       {appointment.location}
                     </p>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        window.open(
+                          'https://maps.google.com/?q=29.976688,31.309752',
+                          '_blank'
+                        )
+                      }
+                      className="mt-2 inline-flex items-center text-xs font-semibold text-blue-700 hover:text-blue-900 underline"
+                    >
+                      {isArabic
+                        ? 'افتح الموقع على خريطة جوجل'
+                        : 'Open location in Google Maps'}
+                    </button>
                   </div>
                 </div>
 
@@ -278,9 +293,10 @@ export default function CouponPage() {
               onClick={() => {
                 const couponText = `Coupon Code: ${coupon.couponCode}\nSecurity Mark: ${coupon.securityMark}\nApplicant: ${application.fullName}`
                 navigator.clipboard.writeText(couponText)
-                alert('Coupon details copied to clipboard!')
+                setCopied(true)
+                setTimeout(() => setCopied(false), 2000)
               }}
-              className="bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+              className="bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 relative"
             >
               <span className="text-2xl block mb-1">📋</span>
               <span
@@ -290,6 +306,13 @@ export default function CouponPage() {
                 {isArabic ? 'نسخ التفاصيل' : 'Copy Details'}
               </span>
             </button>
+            {copied && (
+              <p className="mt-2 text-center text-xs text-emerald-700">
+                {isArabic
+                  ? 'تم نسخ تفاصيل الكوبون إلى الحافظة'
+                  : 'Coupon details copied to clipboard'}
+              </p>
+            )}
           </div>
 
           {/* Success Message */}

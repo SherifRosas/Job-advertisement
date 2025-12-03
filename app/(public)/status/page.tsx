@@ -361,7 +361,23 @@ export default function StatusPage() {
                         >
                           {isArabic ? 'المكان' : 'Location'}
                         </p>
-                        <p className="font-semibold text-sm">{app.appointment.location}</p>
+                        <p className="font-semibold text-sm">
+                          {app.appointment.location}
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            window.open(
+                              'https://maps.google.com/?q=29.976688,31.309752',
+                              '_blank'
+                            )
+                          }
+                          className="mt-1 inline-flex items-center text-[11px] font-semibold text-blue-700 hover:text-blue-900 underline"
+                        >
+                          {isArabic
+                            ? 'افتح الموقع على خريطة جوجل'
+                            : 'Open in Google Maps'}
+                        </button>
                       </div>
                     </div>
                   </div>

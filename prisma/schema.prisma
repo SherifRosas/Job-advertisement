@@ -143,4 +143,50 @@ model Revenue {
   @@map("revenue")
 }
 
+model Campaign {
+  id              String              @id @default(cuid())
+  name            String
+  description     String?
+  type            String              // social_post, email_campaign, multi_channel
+  platforms       String[]            // facebook, twitter, linkedin, whatsapp, email
+  status          String              @default("draft") // draft, scheduled, active, paused, completed, cancelled
+  scheduleType    String              // once, recurring, interval
+  startDate       DateTime?
+  endDate         DateTime?
+  recurrenceRule  String?             // cron expression or interval description
+  content         String?             // AI-generated or manual content
+  language        String              @default("ar") // ar, en, both
+  targetAudience  String?             // all, applicants, selected, etc.
+  autoGenerate    Boolean             @default(true) // Use AI to generate content
+  config          Json?               // Additional configuration (budget, targeting, etc.)
+  createdBy       String?             // Admin user ID
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  executions      CampaignExecution[]
+
+  @@map("campaigns")
+}
+
+model CampaignExecution {
+  id              String      @id @default(cuid())
+  campaignId      String
+  platform        String      // facebook, twitter, linkedin, whatsapp, email
+  status          String      @default("pending") // pending, running, completed, failed
+  content         String?
+  scheduledAt     DateTime
+  executedAt      DateTime?
+  result          Json?       // Execution result with metrics
+  errorMessage    String?
+  reach           Int?        // Estimated or actual reach
+  engagement      Int?        // Likes, shares, clicks, etc.
+  clicks          Int?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  campaign        Campaign    @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+
+  @@map("campaign_executions")
+}
+
 
