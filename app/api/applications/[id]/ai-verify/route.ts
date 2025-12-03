@@ -4,14 +4,15 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(
   _request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     return NextResponse.json({
       success: true,
       verified: true,
       notes: [
-        `AI verification placeholder applied for application ${params.id}. Manual review may still be required.`,
+        `AI verification placeholder applied for application ${id}. Manual review may still be required.`,
       ],
       confidence: 0.5,
     })
