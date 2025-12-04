@@ -2,11 +2,11 @@
   "crons": [
     {
       "path": "/api/campaigns/process",
-      "schedule": "*/5 * * * *"
+      "schedule": "0 9 * * *"
     },
     {
       "path": "/api/agent/process",
-      "schedule": "*/5 * * * *"
+      "schedule": "0 9 * * *"
     }
   ]
 }
