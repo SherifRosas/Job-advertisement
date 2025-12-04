@@ -189,4 +189,24 @@ model CampaignExecution {
   @@map("campaign_executions")
 }
 
+model AgentTask {
+  id              String      @id @default(cuid())
+  type            String      // social_post, email_campaign, analytics, content_generation
+  platform        String?     // facebook, twitter, linkedin, whatsapp, email
+  scheduledAt     DateTime
+  status          String      @default("pending") // pending, running, completed, failed, cancelled
+  content         String?
+  config          Json?       // Additional configuration
+  retryCount      Int         @default(0)
+  maxRetries      Int         @default(3)
+  lastError       String?
+  result          Json?       // Execution result
+  executedAt      DateTime?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  @@index([status, scheduledAt])
+  @@map("agent_tasks")
+}
+
 

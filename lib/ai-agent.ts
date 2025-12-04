@@ -210,10 +210,27 @@ class AIAgent {
       task.content = await this.generateContent('social_post', task.platform, 'ar')
     }
 
-    // In a real implementation, this would post to the actual social media API
-    // For now, we'll simulate it
-    console.log(`📱 Posting to ${task.platform}:`, task.content)
+    // Use actual social media posting integration
+    if (task.platform && task.platform !== 'email') {
+      const { postToSocialMedia } = await import('./social-media')
+      const result = await postToSocialMedia({
+        platform: task.platform,
+        content: task.content || '',
+        link: task.config?.link,
+        config: task.config,
+      })
 
+      return {
+        taskId: task.id,
+        success: result.success,
+        message: result.message || result.error || `Posted to ${task.platform}`,
+        metrics: result.metrics,
+        timestamp: new Date(),
+      }
+    }
+
+    // Fallback for email platform
+    console.log(`📱 Posting to ${task.platform}:`, task.content)
     return {
       taskId: task.id,
       success: true,

@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing Campaign Automation System - Component Tree</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2d3748;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+        
+        .tree {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .node {
+            background: #f7fafc;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+            padding: 20px;
+            margin-left: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .node:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .node-header {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .node-icon {
+            font-size: 1.5em;
+        }
+        
+        .node-content {
+            margin-left: 35px;
+        }
+        
+        .sub-node {
+            background: white;
+            border-left: 3px solid #cbd5e0;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 10px 0;
+            margin-left: 20px;
+        }
+        
+        .sub-node-title {
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        .sub-node-items {
+            margin-left: 20px;
+            color: #718096;
+            line-height: 1.8;
+        }
+        
+        .sub-node-items li {
+            margin: 5px 0;
+            list-style: none;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .sub-node-items li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+        }
+        
+        .method-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .method-item {
+            background: #edf2f7;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #4a5568;
+        }
+        
+        .flow-section {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #e2e8f0;
+        }
+        
+        .flow-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .flow-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .flow-arrow {
+            text-align: center;
+            font-size: 2em;
+            color: #667eea;
+            margin: 10px 0;
+        }
+        
+        .status-flow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        
+        .status-box {
+            background: #edf2f7;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #4a5568;
+            position: relative;
+        }
+        
+        .status-arrow {
+            color: #667eea;
+            font-size: 1.5em;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 20px;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Marketing Campaign Automation System</h1>
+        <p class="subtitle">Component Tree - Vertical Structure</p>
+        
+        <div class="tree">
+            <!-- Database Layer -->
+            <div class="node">
+                <div class="node-header">
+                    <span class="node-icon">📊</span>
+                    <span>Database Layer</span>
+                </div>
+                <div class="node-content">
+                    <div class="sub-node">
+                        <div class="sub-node-title">Campaign Model (prisma/schema.prisma)</div>
+                        <ul class="sub-node-items">
+                            <li>id, name, description</li>
+                            <li>type: social_post, email_campaign, multi_channel</li>
+                            <li>platforms[]: facebook, twitter, linkedin, whatsapp, email</li>
+                            <li>status: draft, scheduled, active, paused, completed, cancelled</li>
+                            <li>scheduleType: once, recurring, interval</li>
+                            <li>startDate, endDate, recurrenceRule</li>
+                            <li>content, language, targetAudience</li>
+                            <li>autoGenerate (boolean)</li>
+                            <li>config (JSON)</li>
+                        </ul>
+                    </div>
+                    <div class="sub-node">
+                        <div class="sub-node-title">CampaignExecution Model</div>
+                        <ul class="sub-node-items">
+                            <li>id, campaignId</li>
+                            <li>platform, status</li>
+                            <li>content, scheduledAt, executedAt</li>
+                            <li>result (JSON), errorMessage</li>
+                            <li>metrics: reach, engagement, clicks</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Core Library -->
+            <div class="node">
+                <div class="node-header">
+                    <span class="node-icon">🔧</span>
+                    <span>Core Library (lib/campaign.ts)</span>
+                </div>
+                <div class="node-content">
+                    <div class="method-list">
+                        <div class="method-item">createCampaign()</div>
+                        <div class="method-item">scheduleCampaignExecutions()</div>
+                        <div class="method-item">executeCampaignExecution()</div>
+                        <div class="method-item">getCampaignMetrics()</div>
+                        <div class="method-item">getAllCampaigns()</div>
+                        <div class="method-item">getCampaignById()</div>
+                        <div class="method-item">updateCampaign()</div>
+                        <div class="method-item">deleteCampaign()</div>
+                        <div class="method-item">pauseCampaign()</div>
+                        <div class="method-item">resumeCampaign()</div>
+                        <div class="method-item">cancelCampaign()</div>
+                        <div class="method-item">processScheduledCampaigns()</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- API Routes -->
+            <div class="node">
+                <div class="node-header">
+                    <span class="node-icon">🌐</span>
+                    <span>API Routes</span>
+                </div>
+                <div class="node-content">
+                    <div class="sub-node">
+                        <div class="sub-node-title">/api/campaigns</div>
+                        <ul class="sub-node-items">
+                            <li>GET → List all campaigns</li>
+                            <li>POST → Create new campaign</li>
+                        </ul>
+                    </div>
+                    <div class="sub-node">
+                        <div class="sub-node-title">/api/campaigns/[id]</div>
+                        <ul class="sub-node-items">
+                            <li>GET → Get campaign + metrics</li>
+                            <li>PUT → Update campaign</li>
+                            <li>DELETE → Delete campaign</li>
+                        </ul>
+                    </div>
+                    <div class="sub-node">
+                        <div class="sub-node-title">/api/campaigns/[id]/actions</div>
+                        <ul class="sub-node-items">
+                            <li>POST → Actions (pause, resume, cancel, execute)</li>
+                        </ul>
+                    </div>
+                    <div class="sub-node">
+                        <div class="sub-node-title">/api/campaigns/process</div>
+                        <ul class="sub-node-items">
+                            <li>POST → Process scheduled campaigns (Cron endpoint)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Admin UI -->
+            <div class="node">
+                <div class="node-header">
+                    <span class="node-icon">🎨</span>
+                    <span>Admin UI (app/admin/campaigns/page.tsx)</span>
+                </div>
+                <div class="node-content">
+                    <div class="sub-node">
+                        <div class="sub-node-title">Campaign List View</div>
+                        <ul class="sub-node-items">
+                            <li>Status badges (color-coded)</li>
+                            <li>Platform tags</li>
+                            <li>Latest executions preview</li>
+                            <li>Action buttons (View, Pause, Resume, Cancel)</li>
+                        </ul>
+                    </div>
+                    <div class="sub-node">
+                        <div class="sub-node-title">Campaign Details Sidebar</div>
+                        <ul class="sub-node-items">
+                            <li>Campaign information</li>
+                            <li>Metrics display (reach, engagement, clicks)</li>
+                            <li>Execution count & success rate</li>
+                            <li>Content preview</li>
+                        </ul>
+                    </div>
+                    <div class="sub-node">
+                        <div class="sub-node-title">Create Campaign Modal</div>
+                        <ul class="sub-node-items">
+                            <li>Basic info (name, description)</li>
+                            <li>Type selection</li>
+                            <li>Platform selection (multi-select)</li>
+                            <li>Schedule configuration</li>
+                            <li>Language selection (ar, en, both)</li>
+                            <li>Auto-generate toggle</li>
+                            <li>Manual content input</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AI Agent Integration -->
+            <div class="node">
+                <div class="node-header">
+                    <span class="node-icon">🤖</span>
+                    <span>AI Agent Integration</span>
+                </div>
+                <div class="node-content">
+                    <div class="sub-node">
+                        <div class="sub-node-title">getAIAgent() from lib/ai-agent.ts</div>
+                        <ul class="sub-node-items">
+                            <li>generateContent() - Type: social_post, email, ad_copy</li>
+                            <li>generateContent() - Platform-specific optimization</li>
+                            <li>generateContent() - Language support (ar, en)</li>
+                            <li>executeTask() - Social media posting</li>
+                            <li>executeTask() - Email campaigns</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Supporting Files -->
+            <div class="node">
+                <div class="node-header">
+                    <span class="node-icon">📁</span>
+                    <span>Supporting Files</span>
+                </div>
+                <div class="node-content">
+                    <ul class="sub-node-items">
+                        <li>supabase-campaign-migration.sql - Database migration script</li>
+                        <li>CAMPAIGN_SYSTEM.md - Full documentation</li>
+                        <li>prisma/schema.prisma - Updated with Campaign models</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Integration Points -->
+            <div class="node">
+                <div class="node-header">
+                    <span class="node-icon">🔗</span>
+                    <span>Integration Points</span>
+                </div>
+                <div class="node-content">
+                    <ul class="sub-node-items">
+                        <li>Admin Dashboard (app/admin/page.tsx) - Added "Marketing Campaigns" link</li>
+                        <li>Prisma Client (lib/db.ts) - Shared database connection</li>
+                        <li>AI Agent System (lib/ai-agent.ts) - Content generation & execution</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Feature Flow Section -->
+        <div class="flow-section">
+            <div class="flow-title">Feature Flow Diagram</div>
+            <div class="flow-box">User Creates Campaign</div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-box">Campaign Created (status: draft/scheduled)</div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-box">Executions Scheduled</div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-box">Cron Job Runs (/api/campaigns/process)</div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-box">Finds Pending Executions</div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-box">For Each Execution:<br>
+                • Update status: pending → running<br>
+                • Generate content (if auto-generate enabled)<br>
+                • Execute via AI Agent<br>
+                • Update status: running → completed/failed<br>
+                • Store metrics (reach, engagement, clicks)
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-box">Admin Views Results</div>
+        </div>
+        
+        <!-- Status Flow Section -->
+        <div class="flow-section">
+            <div class="flow-title">Status Flow</div>
+            <div class="status-flow">
+                <div class="status-box">draft</div>
+                <div class="status-arrow">→</div>
+                <div class="status-box">scheduled</div>
+                <div class="status-arrow">→</div>
+                <div class="status-box">active</div>
+                <div class="status-arrow">→</div>
+                <div class="status-box">completed</div>
+            </div>
+            <div style="text-align: center; margin-top: 20px; color: #718096;">
+                active can also → paused → resume → completed
+            </div>
+            <div style="text-align: center; margin-top: 10px; color: #718096;">
+                active can also → cancelled
+            </div>
+        </div>
+        
+        <!-- Platform Support -->
+        <div class="flow-section">
+            <div class="flow-title">Platform Support</div>
+            <div style="text-align: center; margin-top: 20px;">
+                <div class="flow-box" style="display: inline-block; margin: 10px;">Facebook</div>
+                <div class="flow-box" style="display: inline-block; margin: 10px;">Twitter</div>
+                <div class="flow-box" style="display: inline-block; margin: 10px;">LinkedIn</div>
+                <div class="flow-box" style="display: inline-block; margin: 10px;">WhatsApp</div>
+                <div class="flow-box" style="display: inline-block; margin: 10px;">Email</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Add print functionality
+        window.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'p') {
+                e.preventDefault();
+                window.print();
+            }
+        });
+        
+        // Add export instructions
+        console.log('To export as image:');
+        console.log('1. Press Ctrl+P (or Cmd+P on Mac)');
+        console.log('2. Choose "Save as PDF" or use a PDF to image converter');
+        console.log('3. Or use browser DevTools to take a screenshot');
+    </script>
+</body>
+</html>
+
