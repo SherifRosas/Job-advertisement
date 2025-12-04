@@ -249,7 +249,7 @@ export async function executeCampaignExecution(executionId: string) {
       platform: execution.platform as any,
       scheduledAt: execution.scheduledAt,
       content: content || '',
-      config: execution.campaign.config || {},
+      config: (execution.campaign.config as Record<string, any>) || {},
     })
 
     const result = await agent.executeTask(taskId)
