@@ -16,6 +16,12 @@ export const supabaseServer = createClient(supabaseUrl, supabaseAnonKey, {
 // Helper to get settings (with error handling)
 export async function getSettings() {
   try {
+    // Validate Supabase credentials before making request
+    if (!supabaseUrl || !supabaseAnonKey) {
+      console.warn('Supabase credentials not configured, skipping settings fetch')
+      return null
+    }
+
     const { data, error } = await supabaseServer
       .from('settings')
       .select('*')
@@ -27,12 +33,22 @@ export async function getSettings() {
       if (error.code === 'PGRST116') {
         return null
       }
+      // Only log non-critical errors (suppress "Invalid API key" during build)
+      if (error.message?.includes('Invalid API key')) {
+        console.warn('Supabase API key validation failed - check environment variables')
+        return null
+      }
       console.error('Error fetching settings:', error)
       return null
     }
     
     return data
-  } catch (error) {
+  } catch (error: any) {
+    // Suppress "Invalid API key" errors during build
+    if (error?.message?.includes('Invalid API key')) {
+      console.warn('Supabase API key issue - check environment variables in Vercel')
+      return null
+    }
     console.error('Exception fetching settings:', error)
     return null
   }
