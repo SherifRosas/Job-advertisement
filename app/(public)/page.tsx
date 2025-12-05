@@ -57,6 +57,12 @@ export default async function HomePage() {
                   </a>
                 </div>
                 <Link
+                  href="/login"
+                  className="text-sm text-gray-700 hover:text-purple-600 px-3 py-1 rounded hover:bg-purple-50 transition-colors font-medium"
+                >
+                  Login
+                </Link>
+                <Link
                   href="/admin/login"
                   className="text-sm text-gray-700 hover:text-purple-600 px-3 py-1 rounded hover:bg-purple-50 transition-colors font-medium"
                 >
