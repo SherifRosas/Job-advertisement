@@ -359,7 +359,7 @@ export default function HomeContent({ isClosed }: { isClosed: boolean }) {
           {/* Apply Button */}
           <div className="text-center mt-10">
             <Link
-              href="/apply"
+              href="/login"
               className="inline-block bg-gradient-to-r from-yellow-600 via-purple-600 via-yellow-500 via-blue-600 to-yellow-600 hover:from-yellow-500 hover:via-purple-500 hover:via-yellow-400 hover:via-blue-500 hover:to-yellow-500 text-gray-800 font-black py-7 px-20 rounded-2xl text-xl md:text-2xl lg:text-3xl transition-all duration-500 shadow-[0_20px_60px_rgba(255,215,0,0.5),0_0_40px_rgba(157,78,221,0.4)] hover:shadow-[0_30px_100px_rgba(255,215,0,0.7),0_0_60px_rgba(157,78,221,0.6),0_0_40px_rgba(74,144,226,0.5)] transform hover:scale-110 hover:-translate-y-3 relative overflow-hidden group border-2 border-yellow-400/60 hover:border-purple-400/80"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
