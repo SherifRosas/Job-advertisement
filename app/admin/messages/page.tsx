@@ -8,7 +8,8 @@ import SendMessagesButton from '@/components/SendMessagesButton'
 export default async function MessagesPage() {
   const session = await getServerSession(authOptions)
   
-  if (!session || (session.user as any)?.role !== 'admin') {
+  const userRole = (session.user as any)?.role
+  if (!session || (userRole !== 'admin' && userRole !== 'main-admin')) {
     redirect('/admin/login')
   }
 

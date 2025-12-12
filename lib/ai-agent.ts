@@ -193,15 +193,18 @@ class AIAgent {
     return `Create a ${type}${platformText} in ${lang} for the Egyptian Ministry of Education job advertisement for Accounts Manager position. Make it engaging, professional, and include a call-to-action.`
   }
 
-  private getFallbackContent(
+  /**
+   * Get fallback content when AI generation fails
+   */
+  getFallbackContent(
     type: string,
     platform?: string,
     language: 'ar' | 'en' = 'ar'
   ): string {
     if (language === 'ar') {
-      return `🎯 فرصة وظيفية مميزة في وزارة التربية والتعليم المصرية\n\nوظيفة: مدير حسابات\n📅 فترة التقديم: 1-30 ديسمبر 2025\n\n🔗 قدم الآن: [رابط الموقع]`
+      return `🎯 منصة النفير العالمية للدعاية والإعلانات\n\nمنصة متعددة الفئات للإعلانات:\n• وظائف\n• عقارات\n• سيارات\n• وأكثر\n\n🔗 زوروا موقعنا: https://job-advertisement-ochre.vercel.app`
     }
-    return `🎯 Exciting Job Opportunity at Egyptian Ministry of Education\n\nPosition: Accounts Manager\n📅 Application Period: Dec 1-30, 2025\n\n🔗 Apply now: [website link]`
+    return `🎯 Al-Nafeer Global Advertising Platform\n\nMulti-category advertising platform:\n• Jobs\n• Properties\n• Cars\n• And more\n\n🔗 Visit our website: https://job-advertisement-ochre.vercel.app`
   }
 
   private async executeSocialPost(task: AgentTask): Promise<CampaignResult> {

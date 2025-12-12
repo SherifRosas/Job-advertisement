@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import PlatformHeader from '@/components/PlatformHeader'
 
 interface Campaign {
   id: string
@@ -126,6 +127,7 @@ export default function CampaignsPage() {
 
   return (
     <div className="min-h-screen bg-gray-100">
+      <PlatformHeader />
       <header className="bg-white shadow">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
@@ -431,7 +433,7 @@ function CreateCampaignModal({
               required
               value={formData.type}
               onChange={(e) => setFormData({ ...formData, type: e.target.value as any })}
-              className="w-full border rounded-lg px-3 py-2"
+              className="w-full border rounded-lg px-3 py-2 bg-white text-gray-900"
             >
               <option value="social_post">Social Media Post</option>
               <option value="email_campaign">Email Campaign</option>
@@ -465,7 +467,7 @@ function CreateCampaignModal({
               required
               value={formData.scheduleType}
               onChange={(e) => setFormData({ ...formData, scheduleType: e.target.value as any })}
-              className="w-full border rounded-lg px-3 py-2"
+              className="w-full border rounded-lg px-3 py-2 bg-white text-gray-900"
             >
               <option value="once">Once</option>
               <option value="recurring">Recurring</option>
@@ -513,7 +515,7 @@ function CreateCampaignModal({
             <select
               value={formData.language}
               onChange={(e) => setFormData({ ...formData, language: e.target.value as any })}
-              className="w-full border rounded-lg px-3 py-2"
+              className="w-full border rounded-lg px-3 py-2 bg-white text-gray-900"
             >
               <option value="ar">Arabic</option>
               <option value="en">English</option>
@@ -566,4 +568,7 @@ function CreateCampaignModal({
     </div>
   )
 }
+
+
+
 

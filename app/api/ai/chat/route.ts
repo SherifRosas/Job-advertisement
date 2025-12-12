@@ -38,10 +38,10 @@ function getFallbackAnswer(message: string): string | null {
       },
     },
     {
-      keywords: ['interview', 'مقابلة', 'موعد'],
+      keywords: ['interview', 'مقابلة', 'موعد', 'مقابله', 'مقابلات', 'معلومات عن المقابله', 'معلومات عن المقابلة', 'interview information', 'interview details'],
       answer: {
-        ar: 'ستكون المقابلات من 15/12/2025 إلى 31/12/2025، من الساعة 10 صباحاً حتى 2 ظهراً، باستثناء الخميس والجمعة والسبت. الموقع: وزارة التربية والتعليم - القاهرة/الجيزة (قرب الأهرامات).',
-        en: 'Interviews will be from 15/12/2025 to 31/12/2025, from 10:00 AM to 2:00 PM, excluding Thursdays, Fridays, and Saturdays. Location: Egyptian Ministry of Education - Cairo/Giza (near the Pyramids).',
+        ar: 'معلومات المقابلة:\n\n📅 الفترة: من 15/12/2025 إلى 31/12/2025\n⏰ الوقت: من الساعة 10 صباحاً حتى 2 ظهراً\n🚫 الأيام المستثناة: الخميس والجمعة والسبت\n📍 الموقع: وزارة التربية والتعليم - القاهرة/الجيزة (قرب الأهرامات)\n🗺️ رابط الخريطة: https://maps.google.com/?q=29.976688,31.309752\n\nيرجى الحضور في الموعد المحدد مع المستندات المطلوبة.',
+        en: 'Interview Information:\n\n📅 Period: From 15/12/2025 to 31/12/2025\n⏰ Time: From 10:00 AM to 2:00 PM\n🚫 Excluded Days: Thursdays, Fridays, and Saturdays\n📍 Location: Egyptian Ministry of Education - Cairo/Giza (near the Pyramids)\n🗺️ Map Link: https://maps.google.com/?q=29.976688,31.309752\n\nPlease arrive at the scheduled time with required documents.',
       },
     },
     {
@@ -88,8 +88,20 @@ function getFallbackAnswer(message: string): string | null {
     },
   ]
 
+  // Check patterns - use more flexible matching
   for (const pattern of patterns) {
-    if (pattern.keywords.some((keyword) => lowerMessage.includes(keyword))) {
+    // Check if any keyword appears in the message (case-insensitive, handles variations)
+    const matches = pattern.keywords.some((keyword) => {
+      const normalizedKeyword = keyword.toLowerCase().trim()
+      const messageWithoutDiacritics = isArabic 
+        ? message.replace(/[\u064B-\u065F\u0670]/g, '').toLowerCase()
+        : lowerMessage
+      return lowerMessage.includes(normalizedKeyword) || 
+             messageWithoutDiacritics.includes(normalizedKeyword) ||
+             message.toLowerCase().includes(keyword.toLowerCase())
+    })
+    
+    if (matches) {
       return isArabic ? pattern.answer.ar : pattern.answer.en
     }
   }
@@ -131,25 +143,27 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    // Try fallback answer first (faster and free)
+    // ALWAYS try fallback answer first (faster, free, and more reliable)
     const fallbackAnswer = getFallbackAnswer(message)
     if (fallbackAnswer) {
+      // Return immediately - no API call needed
       return NextResponse.json({
         success: true,
         response: fallbackAnswer,
       })
     }
 
-    // Initialize OpenAI client with timeout
+    // Only use OpenAI for questions not covered by fallback
+    // Use shorter timeout for faster response
     const openai = new OpenAI({
       apiKey: apiKey,
-      timeout: 10000, // 10 second timeout
-      maxRetries: 1,
+      timeout: 5000, // Reduced to 5 second timeout
+      maxRetries: 0, // No retries for faster failure
     })
 
-    // Create a promise with timeout
+    // Create a promise with shorter timeout
     const timeoutPromise = new Promise((_, reject) => {
-      setTimeout(() => reject(new Error('Request timeout')), 8000) // 8 second timeout
+      setTimeout(() => reject(new Error('Request timeout')), 4000) // 4 second timeout
     })
 
     // Call OpenAI API with timeout protection

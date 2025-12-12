@@ -143,6 +143,19 @@ model Revenue {
   @@map("revenue")
 }
 
+model Admin {
+  id            String      @id @default(cuid())
+  email         String      @unique
+  name          String?
+  passwordHash  String      // Hashed password
+  role          String      @default("sub-admin") // main-admin, sub-admin
+  isActive      Boolean     @default(true)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@map("admins")
+}
+
 model Campaign {
   id              String              @id @default(cuid())
   name            String
@@ -159,7 +172,8 @@ model Campaign {
   targetAudience  String?             // all, applicants, selected, etc.
   autoGenerate    Boolean             @default(true) // Use AI to generate content
   config          Json?               // Additional configuration (budget, targeting, etc.)
-  createdBy       String?             // Admin user ID
+  createdBy       String?             // Main admin user ID
+  subAdminId      String?             // Sub-admin assigned to this campaign
   createdAt       DateTime            @default(now())
   updatedAt       DateTime            @updatedAt
 

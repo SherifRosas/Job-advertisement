@@ -21,11 +21,25 @@ export const authOptions: NextAuthOptions = {
           return null
         }
 
-        // Admin authentication (simple implementation)
-        // In production, use proper admin user management
+        // Main Platform Admin authentication
+        const mainAdminEmail = 'sherifrosas.ai@gmail.com'
+        const mainAdminPassword = '777930#Sh'
+        
+        // Additional admin authentication (from env)
         const adminEmail = process.env.ADMIN_EMAIL || 'admin@example.com'
         const adminPassword = process.env.ADMIN_PASSWORD || 'admin123'
 
+        // Check main platform admin first
+        if (credentials.email === mainAdminEmail && credentials.password === mainAdminPassword) {
+          return {
+            id: 'main-admin',
+            email: mainAdminEmail,
+            name: 'Main Platform Admin',
+            role: 'main-admin',
+          }
+        }
+
+        // Check additional admin
         if (credentials.email === adminEmail && credentials.password === adminPassword) {
           return {
             id: 'admin',

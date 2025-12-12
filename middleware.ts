@@ -1,10 +1,16 @@
 import { withAuth } from 'next-auth/middleware'
 import { NextResponse } from 'next/server'
 
+// Helper function to check if role is admin (main-admin or admin)
+function isAdminRole(role: string | undefined): boolean {
+  return role === 'admin' || role === 'main-admin'
+}
+
 export default withAuth(
   function middleware(req) {
     const token = req.nextauth.token
-    const isAdmin = (token as any)?.role === 'admin'
+    const role = (token as any)?.role
+    const isAdmin = isAdminRole(role)
     const isAdminRoute = req.nextUrl.pathname.startsWith('/admin')
     const isAdminLogin = req.nextUrl.pathname === '/admin/login'
 
@@ -12,7 +18,7 @@ export default withAuth(
     console.log('Middleware - Request:', {
       path: req.nextUrl.pathname,
       hasToken: !!token,
-      tokenRole: (token as any)?.role,
+      tokenRole: role,
       tokenKeys: token ? Object.keys(token) : [],
       isAdmin,
       isAdminRoute,
@@ -45,12 +51,14 @@ export default withAuth(
         }
         
         // Debug logging
+        const role = (token as any)?.role
+        const isAuthorized = isAdminRole(role)
         console.log('Middleware - Authorized check:', {
           path: req.nextUrl.pathname,
           hasToken: !!token,
-          tokenRole: (token as any)?.role,
+          tokenRole: role,
           tokenKeys: token ? Object.keys(token) : [],
-          isAuthorized: (token as any)?.role === 'admin',
+          isAuthorized,
         })
         
         // If no token, allow through (will be caught by page-level check)
@@ -59,10 +67,9 @@ export default withAuth(
           return true
         }
         
-        // Require admin for other admin routes
-        const isAuthorized = (token as any)?.role === 'admin'
+        // Require admin or main-admin for other admin routes
         if (!isAuthorized) {
-          console.log('Middleware - Not authorized, token role:', (token as any)?.role)
+          console.log('Middleware - Not authorized, token role:', role)
         }
         return isAuthorized
       },

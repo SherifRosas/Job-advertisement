@@ -6,7 +6,8 @@ import { db } from '@/lib/supabase'
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
-    if (!session || (session.user as any)?.role !== 'admin') {
+    const userRole = (session.user as any)?.role
+    if (!session || (userRole !== 'admin' && userRole !== 'main-admin')) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 

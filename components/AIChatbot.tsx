@@ -36,6 +36,7 @@ export default function AIChatbot() {
       ]
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
+  const [showSuggestions, setShowSuggestions] = useState(true)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   // Update welcome message when language changes
@@ -49,13 +50,42 @@ export default function AIChatbot() {
             : 'Hello! I\'m "Numerous" - your smart job application support assistant. I can help you with:\n\n📋 Job-related questions\n📝 Application process steps\n📅 Interview information\n📄 Required documents\n\nHow can I assist you today?',
         },
       ])
+      setShowSuggestions(true) // Show suggestions when resetting to welcome message
     }
   }, [isArabic, messages.length])
   
-  // Handle suggested question click
+  // Handle suggested question click - ensure it's reliable
   const handleSuggestedQuestion = (question: string) => {
+    if (loading || !question.trim()) return // Prevent clicks while loading or empty questions
+    setShowSuggestions(false) // Hide suggestions when clicked
     handleSend(question)
   }
+  
+  // Show suggestions after assistant responds (including error/timeout messages)
+  useEffect(() => {
+    if (!loading) {
+      if (messages.length === 1) {
+        // Always show suggestions when only welcome message exists
+        setShowSuggestions(true)
+      } else if (messages.length > 1) {
+        const lastMessage = messages[messages.length - 1]
+        // Show suggestions after assistant responds (including error/timeout messages)
+        if (lastMessage.role === 'assistant') {
+          // Small delay to ensure smooth UX and message is fully rendered
+          const timer = setTimeout(() => {
+            setShowSuggestions(true)
+          }, 500)
+          return () => clearTimeout(timer)
+        } else if (lastMessage.role === 'user') {
+          // Hide suggestions when user sends a message
+          setShowSuggestions(false)
+        }
+      }
+    } else {
+      // Hide suggestions while loading
+      setShowSuggestions(false)
+    }
+  }, [messages, loading])
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -66,13 +96,14 @@ export default function AIChatbot() {
     if (!message || loading) return
 
     setInput('')
+    // Don't hide suggestions here - let useEffect handle it based on message role
     setMessages((prev) => [...prev, { role: 'user', content: message }])
     setLoading(true)
 
     try {
-      // Create abort controller for timeout
+      // Create abort controller for timeout - reduced timeout for faster response
       const controller = new AbortController()
-      const timeoutId = setTimeout(() => controller.abort(), 15000) // 15 second timeout
+      const timeoutId = setTimeout(() => controller.abort(), 6000) // Reduced to 6 second timeout
 
       const response = await fetch('/api/ai/chat', {
         method: 'POST',
@@ -94,6 +125,7 @@ export default function AIChatbot() {
           ...prev,
           { role: 'assistant', content: data.response },
         ])
+        // Suggestions will be shown by useEffect after assistant message
       } else {
         const errorMsg = isArabic
           ? 'عذراً، حدث خطأ. يرجى المحاولة مرة أخرى لاحقاً.'
@@ -102,6 +134,7 @@ export default function AIChatbot() {
           ...prev,
           { role: 'assistant', content: errorMsg },
         ])
+        // Suggestions will be shown by useEffect after error message
       }
     } catch (error: any) {
       // Handle timeout or network errors
@@ -121,6 +154,7 @@ export default function AIChatbot() {
           ...prev,
           { role: 'assistant', content: errorMsg },
         ])
+        // Suggestions will be shown by useEffect after error message
       }
     } finally {
       setLoading(false)
@@ -186,24 +220,48 @@ export default function AIChatbot() {
               </div>
             )}
             
-            {/* Show suggested questions only when there's just the welcome message */}
-            {messages.length === 1 && !loading && (
-              <div className="space-y-2 mt-4">
-                <p className="text-xs text-gray-500 font-medium px-2">
-                  {isArabic ? 'اقتراحات الأسئلة:' : 'Suggested questions:'}
-                </p>
+            {/* Show suggested questions reliably - after welcome message and after assistant responses */}
+            {showSuggestions && !loading && (
+              <div className="space-y-2 mt-4 animate-fade-in">
+                <div className="flex items-center justify-between px-2 mb-2">
+                  <p className="text-xs text-gray-500 font-medium">
+                    {isArabic ? 'اقتراحات الأسئلة:' : 'Suggested questions:'}
+                  </p>
+                  <button
+                    onClick={() => setShowSuggestions(false)}
+                    className="text-xs text-gray-400 hover:text-gray-600 transition-colors"
+                    aria-label={isArabic ? 'إخفاء الاقتراحات' : 'Hide suggestions'}
+                  >
+                    {isArabic ? 'إخفاء' : 'Hide'}
+                  </button>
+                </div>
                 <div className="grid grid-cols-1 gap-2">
                   {suggestedQuestions.map((question, idx) => (
                     <button
                       key={idx}
-                      onClick={() => handleSend(question)}
-                      className="text-left px-4 py-2 bg-white border-2 border-blue-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-all text-sm text-gray-700 hover:text-blue-700 shadow-sm hover:shadow-md"
+                      onClick={() => handleSuggestedQuestion(question)}
+                      disabled={loading}
+                      className="text-left px-4 py-2.5 bg-white border-2 border-blue-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 active:bg-blue-100 transition-all text-sm text-gray-700 hover:text-blue-700 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-1"
                       dir={isArabic ? 'rtl' : 'ltr'}
+                      type="button"
                     >
                       {question}
                     </button>
                   ))}
                 </div>
+              </div>
+            )}
+            
+            {/* Show button to reveal suggestions if hidden */}
+            {!showSuggestions && !loading && messages.length > 1 && (
+              <div className="mt-4 flex justify-center">
+                <button
+                  onClick={() => setShowSuggestions(true)}
+                  className="text-xs text-blue-600 hover:text-blue-700 font-medium px-4 py-2 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors"
+                  aria-label={isArabic ? 'إظهار الاقتراحات' : 'Show suggestions'}
+                >
+                  {isArabic ? '💡 إظهار اقتراحات الأسئلة' : '💡 Show suggested questions'}
+                </button>
               </div>
             )}
             

@@ -24,7 +24,8 @@ export default async function AdminDashboard() {
   }
   
   const userRole = (session.user as any)?.role
-  if (userRole !== 'admin') {
+  // Allow both 'admin' and 'main-admin' roles
+  if (userRole !== 'admin' && userRole !== 'main-admin') {
     console.log('User role is not admin:', userRole, 'Redirecting to login')
     redirect('/admin/login')
   }

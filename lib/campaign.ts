@@ -21,6 +21,7 @@ export interface CreateCampaignInput {
   autoGenerate?: boolean
   config?: Record<string, any>
   createdBy?: string
+  subAdminId?: string // Optional sub-admin ID (defaults to main admin if not provided)
 }
 
 export interface CampaignMetrics {
@@ -45,28 +46,73 @@ export async function createCampaign(input: CreateCampaignInput) {
       ? input.platforms[0] 
       : undefined
     const language = input.language === 'both' ? 'ar' : (input.language || 'ar')
-    content = await agent.generateContent('social_post', platform, language as 'ar' | 'en')
+    
+    try {
+      // Try AI generation, but fallback gracefully if it fails
+      content = await agent.generateContent('social_post', platform, language as 'ar' | 'en')
+    } catch (error) {
+      console.warn('AI content generation failed (quota exceeded or API error), using fallback content:', error)
+      // Use fallback content - this is fine, campaigns can work without AI
+      content = agent.getFallbackContent('social_post', platform, language as 'ar' | 'en')
+    }
   }
 
-  const campaign = await prisma.campaign.create({
-    data: {
-      name: input.name,
-      description: input.description,
-      type: input.type,
-      platforms: input.platforms,
-      scheduleType: input.scheduleType,
-      startDate: input.startDate,
-      endDate: input.endDate,
-      recurrenceRule: input.recurrenceRule,
-      content: content || '',
-      language: input.language || 'ar',
-      targetAudience: input.targetAudience,
-      autoGenerate: input.autoGenerate ?? true,
-      config: input.config || {},
-      createdBy: input.createdBy,
-      status: input.startDate && input.startDate > new Date() ? 'scheduled' : 'draft',
-    },
-  })
+  // Get main admin ID to assign as default sub-admin (account manager)
+  // Make this optional - don't fail campaign creation if admin lookup fails
+  let mainAdminId: string | undefined = undefined
+  try {
+    const mainAdmin = await prisma.admin.findFirst({
+      where: {
+        email: 'sherifrosas.ai@gmail.com',
+        role: 'main-admin',
+        isActive: true,
+      },
+    })
+    if (mainAdmin) {
+      mainAdminId = mainAdmin.id
+    }
+  } catch (error) {
+    console.warn('Could not fetch main admin (database may not be fully set up):', error)
+    // Continue without sub-admin assignment - this is not critical for campaign creation
+  }
+
+  // Create the campaign - handle database connection errors gracefully
+  let campaign
+  try {
+    campaign = await prisma.campaign.create({
+      data: {
+        name: input.name,
+        description: input.description,
+        type: input.type,
+        platforms: input.platforms,
+        scheduleType: input.scheduleType,
+        startDate: input.startDate,
+        endDate: input.endDate,
+        recurrenceRule: input.recurrenceRule,
+        content: content || '',
+        language: input.language || 'ar',
+        targetAudience: input.targetAudience,
+        autoGenerate: input.autoGenerate ?? true,
+        config: input.config || {},
+        createdBy: input.createdBy,
+        subAdminId: input.subAdminId || mainAdminId, // Use provided sub-admin or default to main admin
+        status: input.startDate && input.startDate > new Date() ? 'scheduled' : 'draft',
+      },
+    })
+  } catch (dbError: any) {
+    // If database connection fails, provide a helpful error message
+    if (dbError.message?.includes('Tenant or user not found') || 
+        dbError.message?.includes('FATAL') ||
+        dbError.code === 'P1001') {
+      throw new Error(
+        'Database connection failed. Please verify your DATABASE_URL in .env.local. ' +
+        'The database credentials may be incorrect or the database may not exist. ' +
+        'Error: ' + dbError.message
+      )
+    }
+    // Re-throw other database errors
+    throw dbError
+  }
 
   // Create initial executions if campaign is scheduled
   if (campaign.status === 'scheduled' && campaign.startDate) {
