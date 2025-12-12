@@ -8,8 +8,12 @@ import CloseAdvertisementButton from '@/components/CloseAdvertisementButton'
 export default async function SettingsPage() {
   const session = await getServerSession(authOptions)
   
+  if (!session) {
+    redirect('/admin/login')
+  }
+  
   const userRole = (session.user as any)?.role
-  if (!session || (userRole !== 'admin' && userRole !== 'main-admin')) {
+  if (userRole !== 'admin' && userRole !== 'main-admin') {
     redirect('/admin/login')
   }
 
