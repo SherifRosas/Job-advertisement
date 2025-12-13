@@ -15,9 +15,12 @@ export async function POST(request: NextRequest) {
     fetch('http://127.0.0.1:7242/ingest/6259713f-96f1-450b-bc8b-be2703a50b4c',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'route.ts:11',message:'After getServerSession',data:{sessionIsNull:session===null,sessionExists:!!session,hasUser:!!session?.user},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
     // #endregion
     
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/6259713f-96f1-450b-bc8b-be2703a50b4c',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'route.ts:14',message:'Before session null check',data:{sessionIsNull:session===null},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+    // #endregion
     if (!session) {
       // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/6259713f-96f1-450b-bc8b-be2703a50b4c',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'route.ts:14',message:'Session is null, returning unauthorized',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+      fetch('http://127.0.0.1:7242/ingest/6259713f-96f1-450b-bc8b-be2703a50b4c',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'route.ts:16',message:'Session is null, returning unauthorized',data:{},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
       // #endregion
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
@@ -83,4 +86,3 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: error.message || 'Failed to close' }, { status: 400 })
   }
 }
-
