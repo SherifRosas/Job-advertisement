@@ -1,13 +1,43 @@
 'use client'
 
 import { signIn } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useState, useEffect } from 'react'
 
 export default function LoginPage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+
+  // Check for OAuth errors in URL
+  useEffect(() => {
+    const authError = searchParams.get('authError')
+    const errorParam = searchParams.get('error')
+    
+    if (authError || errorParam) {
+      let errorMessage = 'OAuth authentication failed.'
+      
+      if (authError) {
+        // Decode the error if it's base64 encoded
+        try {
+          const decoded = atob(authError)
+          errorMessage = `OAuth Error: ${decoded}`
+        } catch {
+          errorMessage = `OAuth Error: ${authError}`
+        }
+      } else if (errorParam === 'OAuthCallback') {
+        errorMessage = 'OAuth callback failed. Please check your OAuth configuration.'
+      } else if (errorParam === 'Configuration') {
+        errorMessage = 'OAuth configuration error. Please check environment variables.'
+      } else if (errorParam) {
+        errorMessage = `Authentication error: ${errorParam}`
+      }
+      
+      setError(errorMessage)
+      console.error('OAuth error detected:', { authError, errorParam })
+    }
+  }, [searchParams])
 
   const handleGoogleLogin = async () => {
     setLoading(true)
