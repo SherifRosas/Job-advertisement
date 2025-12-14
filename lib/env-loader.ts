@@ -9,22 +9,29 @@ import { join } from 'path'
 let cachedDatabaseUrl: string | null = null
 
 export function getDatabaseUrl(): string {
-  // Don't use cache in development - always read fresh
-  // This ensures we get the latest .env.local changes
-  if (process.env.NODE_ENV === 'production' && cachedDatabaseUrl) {
-    return cachedDatabaseUrl
+  // In production/build (Vercel), only use process.env - don't try to read .env.local
+  if (process.env.NODE_ENV === 'production' || process.env.VERCEL) {
+    // In production, always use process.env directly
+    if (process.env.DATABASE_URL) {
+      // Remove any "echo" prefix that might have been accidentally added
+      let url = process.env.DATABASE_URL.trim()
+      if (url.startsWith('echo ')) {
+        url = url.substring(5).trim()
+      }
+      if (url.startsWith('postgresql://') || url.startsWith('postgres://')) {
+        return url
+      }
+    }
+    return process.env.DATABASE_URL || ''
   }
-  
-  // Clear cache to force fresh read
-  cachedDatabaseUrl = null
 
-  // First, try process.env (Next.js should load it)
+  // In development: try process.env first, then fall back to .env.local
   if (process.env.DATABASE_URL && process.env.DATABASE_URL.startsWith('postgresql://')) {
     cachedDatabaseUrl = process.env.DATABASE_URL
     return cachedDatabaseUrl
   }
 
-  // If process.env has wrong value, try reading .env.local directly
+  // Only try reading .env.local in development (not in Vercel build)
   try {
     const envPath = join(process.cwd(), '.env.local')
     const envContent = readFileSync(envPath, 'utf-8')
