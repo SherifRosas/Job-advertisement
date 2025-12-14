@@ -68,7 +68,7 @@ export function getDatabaseUrl(): string {
         console.log('✅ Loaded DATABASE_URL from .env.local file directly')
         console.log('   URL length:', url.length)
         console.log('   URL preview:', url.substring(0, 80) + '...')
-        return cachedDatabaseUrl
+        return url
       } else {
         console.warn('⚠️ DATABASE_URL found but format is invalid:', url.substring(0, 50))
       }
