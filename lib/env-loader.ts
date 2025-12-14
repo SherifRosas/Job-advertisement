@@ -3,14 +3,12 @@
  * This ensures we get the correct value even if Next.js env loading has issues
  */
 
-import { readFileSync } from 'fs'
-import { join } from 'path'
-
 let cachedDatabaseUrl: string | null = null
 
 export function getDatabaseUrl(): string {
   // In production/build (Vercel), only use process.env - don't try to read .env.local
-  if (process.env.NODE_ENV === 'production' || process.env.VERCEL) {
+  // Check VERCEL env var first (more reliable than NODE_ENV during build)
+  if (process.env.VERCEL || process.env.NODE_ENV === 'production') {
     // In production, always use process.env directly
     if (process.env.DATABASE_URL) {
       // Remove any "echo" prefix that might have been accidentally added
@@ -32,7 +30,11 @@ export function getDatabaseUrl(): string {
   }
 
   // Only try reading .env.local in development (not in Vercel build)
+  // Use dynamic import to avoid bundling fs module in client-side code
   try {
+    // Dynamic import to ensure this only runs server-side
+    const { readFileSync } = require('fs')
+    const { join } = require('path')
     const envPath = join(process.cwd(), '.env.local')
     const envContent = readFileSync(envPath, 'utf-8')
     
